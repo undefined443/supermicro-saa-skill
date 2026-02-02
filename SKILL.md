@@ -1,5 +1,5 @@
 ---
-name: saa-server-management
+name: supermicro-saa
 description: Guide for using SAA (SuperServer Automation Assistant) to manage Supermicro servers. Use when performing server management tasks including firmware updates, BIOS/BMC configuration, system health monitoring, power management, storage management, and security operations on Supermicro servers.
 ---
 
@@ -23,10 +23,12 @@ saa -i <BMC_IP> -u <USER> -p <PASSWORD> -c <COMMAND> [OPTIONS]
 
 ### Single System In-Band
 
-Operates on local OS (no -i option):
+Operates on local OS (no -i option). In-Band mode requires root privileges to access hardware interfaces directly.
+
+**Note**: Only commands that access hardware require sudo. Help queries (`-h`) do not need sudo. Before executing In-Band commands, ask user for `<SUDO_PASSWORD>`. Never store or log the password.
 
 ```bash
-saa -c <COMMAND> [OPTIONS]
+echo <SUDO_PASSWORD> | sudo -S saa -c <COMMAND> [OPTIONS]
 ```
 
 ### Single System Remote In-Band
@@ -136,7 +138,7 @@ saa -i 192.168.1.100 -u ADMIN -p ADMIN -c GetBiosInfo
 saa -i 192.168.1.100 -u ADMIN -p ADMIN -c GetFirmwareInventoryInfo
 
 # Get BMC info (In-Band)
-saa -c GetBmcInfo
+echo <SUDO_PASSWORD> | sudo -S saa -c GetBmcInfo
 ```
 
 ### Health Monitoring
@@ -173,7 +175,7 @@ saa -i 192.168.1.100 -u ADMIN -p ADMIN -c UpdateBios --file BIOS.bin
 saa -i 192.168.1.100 -u ADMIN -p ADMIN -c UpdateBmc --file BMC.bin
 
 # Update BIOS (In-Band, local)
-saa -c UpdateBios --file BIOS.bin
+echo <SUDO_PASSWORD> | sudo -S saa -c UpdateBios --file BIOS.bin
 ```
 
 ### Configuration Management
