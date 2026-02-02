@@ -1,0 +1,28 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sets KCS Privilege.
+Required Arguments
+    --priv_level    <KCS Privilege level>
+          Sets KCS privilege with level.
+          1 = Call Back
+          2 = User
+          3 = Operator
+          4 = Administrator
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetKcsPriv --priv_level 'Call
+        Back'
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetKcsPriv --priv_level 1
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetKcsPriv --priv_level
+        'Call Back'
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetKcsPriv --priv_level 1

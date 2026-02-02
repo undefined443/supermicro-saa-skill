@@ -1,0 +1,41 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Controls the power status of CMM system.
+Required Arguments
+    --action    <action>
+          Sets power action with:
+          0 = down
+          1 = up
+          2 = cycle
+          3 = reset
+          5 = softshutdown
+          24 = accycle
+    --Blade    <Blade Index>
+          Assigns Blade index.
+          [A1-A14], [B1-B14] or ALL
+Optional Arguments
+    --node    <Node Index>
+          Assigns node index.
+          [1-4]
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBladePowerAction --action
+        up --Blade A1 --node 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBladePowerAction --action
+        up --Blade A1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBladePowerAction --action
+        up --Blade ALL
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBladePowerAction
+        --action up --Blade A1 --node 1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBladePowerAction
+        --action up --Blade A1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBladePowerAction
+        --action up --Blade ALL

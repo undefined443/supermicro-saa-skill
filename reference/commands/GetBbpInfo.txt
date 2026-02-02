@@ -1,0 +1,27 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the BBP information of the managed system/input BBP image file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the BBP information from an input BBP image file.
+    --json_view
+          Sets the output format to JSON.
+    --file_only
+          Works with --file, and only reads BBP information from the input image
+          file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetBbpInfo --file BBP.bin
+  In-Band
+    # ./saa -c GetBbpInfo --file BBP.bin --file_only
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetBbpInfo --file BBP.bin

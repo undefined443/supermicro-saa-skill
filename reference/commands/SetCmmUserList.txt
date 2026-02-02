@@ -1,0 +1,86 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes CMM user related actions.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = Add
+          2 = Del
+          3 = Level
+          4 = SetPwd
+          5 = Test
+          6 = EnableType
+Optional Arguments
+    --user_id    <user ID>
+          The CMM user ID.
+    --user_name    <user name>
+          The CMM user name.
+    --user_password    <user password>
+          The CMM user password.
+    --user_privilege    <user privilege>
+          The CMM user privilege.
+          For privilege level:
+          Administrator:  4
+          Operator     :  3
+          User         :  2
+          Callback     :  1
+          No Access    : 15
+          The "No Access" privilege level is not supported after AST2600
+          platform
+    --account_type    <account type>
+          Supported account types for CMM management.
+          0 = SNMP
+    --account_type_status    <account type status>
+          Manage account type status.
+          0 = Disable
+          1 = Enable
+    --ap    <authentication protocol>
+          The authentication protocol.
+          0 = MD5
+          1 = SHA
+    --pp    <private protocol>
+          The private protocol.
+          0 = DES
+          1 = AES
+    --ak    <authentication key>
+          The authentication key.
+    --pk    <private key>
+          The private key.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action Add
+        --user_id 3 --user_name Admin123 --user_password aDMIN123
+        --user_privilege 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action Del
+        --user_id 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action Level
+        --user_id 3 --user_privilege 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action SetPwd
+        --user_id 3 --user_password PASSWORD3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action Test
+        --user_name NAME3 --user_password PASSWORD3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetCmmUserList --action
+        EnableType --user_id 3 --account_type 0 --account_type_status enable
+        --ap 0 --pp DES --ak Admin123 --pk Admin123
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        Add --user_id 3 --user_name Admin123 --user_password aDMIN123
+        --user_privilege 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        Del --user_id 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        Level --user_id 3 --user_privilege 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        SetPwd --user_id 3 --user_password PASSWORD3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        Test --user_name NAME3 --user_password PASSWORD3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetCmmUserList --action
+        EnableType --user_id 3 --account_type 0 --account_type_status enable
+        --ap 0 --pp DES --ak Admin123 --pk Admin123

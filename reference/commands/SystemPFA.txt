@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Monitors and controls the predictive failure analysis of the managed system.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetCurrentStatus
+          2 = Enabled
+          3 = Disabled
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --json_view
+          Sets the output format to JSON.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SystemPFA  --action 1
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SystemPFA --action Disabled
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SystemPFA --action Disabled --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SystemPFA  --action
+        Enabled --reboot --post_complete
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SystemPFA --action Disabled
+        --reboot --remote_saa /root/saa

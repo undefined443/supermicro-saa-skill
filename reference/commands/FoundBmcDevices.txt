@@ -1,0 +1,40 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Use this command to edit the list of found BMC devices.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = List
+          2 = Clear
+          3 = Copy
+          4 = CopyAll
+          5 = SaveAs
+          6 = Refresh
+    Note:
+        1. Use action List to list all found BMC devices.
+        2. Use action Clear to clear all found BMC devices.
+        3. Use action Copy to copy the found devices to the default managed
+        group.
+        4. Use action CopyAll to copy all found devices to the default managed
+        group
+        5. Use action saveAs to save the results of found BMC devices to a file
+        6. Use action Refresh to refresh the result of found BMC devices.
+Optional Arguments
+    --file    <file name>
+          The file to write, required with action "saveAs" used
+    --index    <index>
+          The indices of the host to copy, required with action "Copy" used
+Usage Modes
+    [In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  In-Band
+    # ./saa -c FoundBmcDevices --action List
+    # ./saa -c FoundBmcDevices --action Clear
+    # ./saa -c FoundBmcDevices --action Copy --index "1 2 3" 
+    # ./saa -c FoundBmcDevices --action CopyAll
+    # ./saa -c FoundBmcDevices --action SaveAs --file file
+    # ./saa -c FoundBmcDevices --action Refresh

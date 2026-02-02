@@ -1,0 +1,60 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Secure erase for hard disk.
+Required Arguments
+    --file    <file name>
+          HDD serial number mapping file.
+Optional Arguments
+    --current_password    <current password>
+          Checks the current BIOS Administrator password.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --json_view
+          Sets the output format to JSON.
+    --precheck
+          Only displays HDD status.
+    --action    <action>
+          Sets secure erase action to: 
+          1 = SetPassword
+          2 = SecurityErase
+          3 = SecurityErasePWD
+          4 = SecurityErasePSID
+          5 = ChangePassword
+          6 = ClearPassword
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --cur_pw_file    <Current password file>
+          The specified file path to read current password.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseDisk --file
+        Password.txt --precheck
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseDisk --action
+        SecurityErase --file Password.txt --reboot
+  In-Band
+    # ./saa -c SecureEraseDisk --action SecurityErasePSID --file PSID.txt
+        --reboot
+    # ./saa -c SecureEraseDisk --action SetPassword --file Password.txt --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SecureEraseDisk --action SetPassword --file Password.txt --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseDisk --action
+        SecurityErasePWD --file Password.txt --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SecureEraseDisk --action
+        SecurityErasePWD --file Password.txt --reboot
+Notice
+    1. SecurityErase action is used for security erasing device without HDD
+    password installed.
+    2. SecurityErasePWD action will security erase the HDD with HDD password.
+    3. SecurityErasePSID action will security erase the HDD with PSID, only
+    supported by TCG device.

@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Monitor CDU system to get status and set settings remotely.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetStatus
+          2 = SetCfg
+Optional Arguments
+    --file    <file name>
+          For action 1 = GetStatus
+          Prints the status on screen if the file-saving function is not
+          available.
+          For action 2 = SetCfg
+          Sets the CDU Alert option.
+          Monitors the host with the given JSON file listing device and sensor
+          data records to be monitored.
+    --overwrite
+          Overwrites the output file.
+    --json_view
+          Sets the output format to JSON.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MonitorCDUStatus --action
+        GetStatus --file cdustatus.txt
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MonitorCDUStatus --action
+        SetCfg --file current.json
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MonitorCDUStatus --action
+        GetStatus --file cdustatus.txt --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MonitorCDUStatus --action
+        SetCfg --file current.json

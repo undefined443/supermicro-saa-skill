@@ -1,0 +1,67 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the GPU log of the managed system.
+Required Arguments
+    --file    <file name>
+          Saves the GPU log to a file.
+    --item    <item name>
+          Item type of GPU:
+          1 = HGX
+          2 = MI300X
+    --type    <type>
+          Download type of GPU:
+          1 = DebugToken
+          This option is only used for downloading Debug Token certificate log
+          file.
+Optional Arguments
+    --overwrite
+          Overwrites the output file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetGpuLog --item HGX --file
+        log.tgz
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetGpuLog --item MI300X --file
+        log.tgz
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetGpuLog --item HGX --type
+        DebugToken --file DebugToken.log
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetGpuLog --item HGX --file
+        log.tgz --overwrite
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetGpuLog --item MI300X --file
+        log.tgz --overwrite
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetGpuLog --item HGX --type
+        DebugToken --file DebugToken.log
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetGpuLog --item HGX --file log.tgz --overwrite --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetGpuLog --item MI300X --file log.tgz --overwrite --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetGpuLog --item HGX --type DebugToken --file DebugToken.log
+        --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetGpuLog --item HGX
+        --file log.tgz --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetGpuLog --item MI300X
+        --file log.tgz --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetGpuLog --item HGX
+        --type 1 --file DebugToken.log
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetGpuLog --item HGX --file
+        log.tgz --overwrite --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetGpuLog --item MI300X --file
+        log.tgz --overwrite --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetGpuLog --item HGX --type 1
+        --file DebugToken.log --remote_saa /root/saa
+Notice
+    1. Currently GetGpuLog only supports on H100 of HGX platform.

@@ -1,0 +1,47 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Reboots the Switch.
+Required Arguments
+    None
+Optional Arguments
+    --switch_user    <Switch user ID>
+          Assigns switch user when rebooting via CMM with switch credentials.
+    --switch_pw    <Switch user password>
+          Assigns switch password when rebooting via CMM with switch
+          credentials.
+    --dev_id    <Device ID>
+          Assigns switch index when rebooting via CMM.
+          Switch index: [A1,A2,B1,B2] or [ALL]
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RebootBladeSwitch 
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RebootBladeSwitch --dev_id A1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RebootBladeSwitch --dev_id A1
+        --switch_user ADMIN --switch_pw ADMIN
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RebootBladeSwitch 
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RebootBladeSwitch --dev_id
+        A1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RebootBladeSwitch --dev_id
+        A1 --switch_user ADMIN --switch_pw ADMIN
+Notice
+    1. Simultaneously rebooting all switches may cause temporary network
+    disconnection for all blades in the chassis.
+    2. To reboot the switch via CMM without switch credentials, use --dev_id
+    option only.
+    3. To directly reboot the switch with switch IP, please do not use --dev_id,
+    --switch_user, and --switch_pw options. Please use switch IP and -u and -p
+    (for switch credentials) instead.
+    4. To reboot the switch via CMM with switch credentials, use --dev_id,
+    --switch_user, and --switch_pw options together.
+    5. Direct reboot via switch IP and credentials is supported only for the
+    following switch modules with the specified minimum firmware versions or
+    above: SBM-25G-P10 (1.0.0.10), MBM-XEM-002 (2.2.1.34), MBM-GEM-004
+    (1.3.0.8), and SBM-25G-100 (1.4.0.11).

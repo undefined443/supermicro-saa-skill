@@ -1,0 +1,38 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the CMM dummy switch with the given image file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Updates the CMM dummy switch with the given image file.
+    --upload
+          Uploads the CMM dummy switch with the given image file only.
+    --update    <update rule>
+          Updates CMM dummy switch with the existing image on CMM.
+          Supported update rule: [Apply]
+    --individually
+          Updates each CMM dummy switch with its corresponding image file
+          individually.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateDummySwitch --file
+        DummySwitch.rom
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateDummySwitch --file
+        DummySwitch.rom --upload
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateDummySwitch --update
+        Apply
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateDummySwitch --file
+        DummySwitch.rom
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateDummySwitch --file
+        DummySwitch.rom --upload
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateDummySwitch --update
+        Apply

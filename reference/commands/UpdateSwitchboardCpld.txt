@@ -1,0 +1,51 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes update Switchboard CPLD based on type selected.
+Required Arguments
+    --file    <file name>
+          Updates the Main or Side Switchboard CPLD with the given image file.
+    --type    <type>
+          Sets action to:
+          1 = Main
+          2 = Left
+          3 = Right
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --individually
+          Updates each CPLD Switch Board with its corresponding configuration
+          file individually.
+    --post_complete
+          Waits for the managed system’s POST to complete after rebooting.
+    --index    <index>
+          Sets the CPLD index. The default value is 1, and the index count
+          starts from 1.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateSwitchboardCpld --type
+        Main --file Switchboard_CPLD.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateSwitchboardCpld --type
+        Main --file Switchboard_CPLD.bin --index 2
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateSwitchboardCpld --type Left
+        --file Switchboard_CPLD.bin
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateSwitchboardCpld --type Main --file Switchboard_CPLD.bin
+        --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateSwitchboardCpld
+        --type Right --file Switchboard_CPLD.bin
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateSwitchboardCpld --type
+        Left --file Switchboard_CPLD.bin
+Notice
+    1. Support only on RoT system of X13/H13 and later platforms.

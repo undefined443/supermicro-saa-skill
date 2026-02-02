@@ -1,0 +1,22 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Shows current USB access mode.
+Required Arguments
+    None
+Optional Arguments
+    None
+Usage Modes
+    [In-Band] [Remote In-Band] [Multiple Systems Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  In-Band
+    # ./saa -c GetUsbAccessMode 
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUsbAccessMode 
+Multiple Systems
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUsbAccessMode 

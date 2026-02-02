@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Loads the default factory CMM configuration.
+Required Arguments
+    None
+Optional Arguments
+    --clear_user_cfg
+          Clears user configuration.
+    --preserve_user_cfg
+          Preserves user configuration.
+    --load_unique_password
+          Loads CMM unique password.
+    --load_default_password
+          Loads CMM default password.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --preserve_user_cfg
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --clear_user_cfg --load_unique_password
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --clear_user_cfg --load_default_password
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --preserve_user_cfg
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --clear_user_cfg --load_unique_password
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c LoadDefaultCmmCfg
+        --clear_user_cfg --load_default_password
+Notice
+    1. The option [--clear_user_cfg] has to pair with option
+    [--load_unique_password] or [--load_default_password].

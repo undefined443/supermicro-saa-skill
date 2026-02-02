@@ -1,0 +1,59 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the profiles of the CMM and Blade configuration on CMM
+Required Arguments
+    --action    <action>
+          Supported actions: Get, Edit and Delete.
+Optional Arguments
+    --file    <file name>
+          Saves the profile list to a file.
+          Prints the profile list on the screen if the file-saving function is
+          not available.
+    --file_id    <file ID>
+          Gets and edits profile information or deletes the profile on CMM with
+          the specific file ID
+    --profile_name    <profile name>
+          Edits the profile name of the specified profile on CMM with the
+          specific file ID.
+    --profile_description    <profile description>
+          Edits the profile description of the specified profile on CMM with the
+          specific file ID.
+    --schedule_update_time    <schedule update time>
+          Edits the scheduled update time of the specified profile on CMM with
+          the specific file ID.
+          Format: [YYYY-MM-DD_HH:MM]
+    --overwrite
+          Overwrites the output file.
+    --showall
+          Gets the profile association information between the specified profile
+          and selected Blade systems with a specific profile ID.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ProfileManage --action Get
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ProfileManage --action Get
+        --file_id 2 --showall
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ProfileManage --action Edit
+        --file_id 2 --profile_name filename.xml --profile_description 'For Blade
+        A1' --schedule_update_time 2021-08-27_00:00
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ProfileManage --action Delete
+        --file_id 2
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ProfileManage --action Delete
+        --file_id ALL
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ProfileManage --action Get
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ProfileManage --action Get
+        --file_id 2 --showall
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ProfileManage --action
+        Edit --file_id 2 --profile_name filename.xml --profile_description 'For
+        Blade A1' --schedule_update_time 2021-08-27_00:00
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ProfileManage --action
+        Delete --file_id 2
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ProfileManage --action
+        Delete --file_id ALL

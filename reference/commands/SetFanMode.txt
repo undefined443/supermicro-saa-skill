@@ -1,0 +1,34 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sets Fan configuration for the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --Fanmode    <Fan Mode ID>
+          Sets the selected FanMode type:
+          0 = Standard
+          1 = Full
+          2 = Optimal
+          3 = PUE2 Optimal
+          4 = Heavy IO
+          5 = PUE3 Optimal
+          6 = Liquid Cooling
+          7 = Smart
+          8 = PUE Optimal
+          9 = Smart Cooling
+          10 = Performance
+          11 = Silent
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetFanMode --fanmode 3
+  In-Band
+    # ./saa -c SetFanMode --fanmode 3
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetFanMode --fanmode 3

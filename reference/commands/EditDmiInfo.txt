@@ -1,0 +1,47 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Edits the given DMI information text file.
+Required Arguments
+    --file    <file name>
+          The DMI information file to be edited (or created if it does not
+          exist).
+    --item_type    <item type>
+          Specifies the item type.
+    --item_name    <item name>
+          Specifies the item name.
+    --shn    <short name>
+          Specifies the item in short name format.
+    --value    <assignment value>
+          Assigns the value to the item.
+    --default
+          Assigns the default value to the item.
+    Note:
+        1. Either [--item_type, --item_name] or [--shn] is required.
+        2. Either [--value] or [--default] is required.
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c EditDmiInfo --file dmi.txt
+        --shn SYVS --value "1.02"
+  In-Band
+    # ./saa -c EditDmiInfo --file dmi.txt --shn SYVS --value "1.02"
+    # ./saa -c EditDmiInfo --file dmi.txt --shn SYVS --default
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        EditDmiInfo --file dmi.txt --shn SYVS --value "1.02" --remote_saa
+        /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c EditDmiInfo --file dmi.txt
+        --item_type "System" --item_name "Version" --value "1.02"
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c EditDmiInfo --file dmi.txt
+        --shn SYVS --value "1.02" --remote_saa /root/saa

@@ -1,0 +1,19 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets SPDM information of the managed system(G1SMH/G1SMH-G).
+Required Arguments
+    None
+Optional Arguments
+    --item    <item name>
+          Specify the item whose measurements and summary are to be displayed.
+    --showall
+          Display all measurements and summary for the specified item.
+Usage Modes
+    [OOB] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetSpdmInfo 

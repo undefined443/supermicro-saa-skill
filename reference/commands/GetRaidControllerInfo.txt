@@ -1,0 +1,55 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the RAID controller information of the managed system/input RAID image
+    file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the RAID controller firmware information from an input RAID
+          image file.
+    --controller    <Controller>
+          <Broadcom/Marvell> Vendor of RAID controller.
+    --dev_id    <Device ID>
+          RAID controller device ID.
+    --json_view
+          Sets the output format to JSON.
+    --file_only
+          Works with --file, and only reads RAID controller firmware information
+          from the input image file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetRaidControllerInfo
+        --controller broadcom
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetRaidControllerInfo --file
+        RAID_controller.rom
+  In-Band
+    # ./saa -c GetRaidControllerInfo --file RAID_controller.rom --file_only
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetRaidControllerInfo
+        --controller marvell --dev_id 0 --file RAID_controller.rom
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetRaidControllerInfo --controller marvell --dev_id 0 --file
+        RAID_controller.rom
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetRaidControllerInfo --controller marvell --dev_id 0 --file
+        RAID_controller.rom
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetRaidControllerInfo 
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetRaidControllerInfo
+        --controller marvell --dev_id 0 --file RAID_controller.rom
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetRaidControllerInfo
+        --controller marvell --dev_id 0 --file RAID_controller.rom
+Notice
+    1. Only Broadcom 3008, 3108, 3808, 3816 and Marvell SE9230's RAID
+    controllers are supported.
+    2. -I Redfish_HI is required for in-band usage on X12 and later platforms.

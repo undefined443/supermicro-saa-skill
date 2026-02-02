@@ -1,0 +1,22 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Opens a blade console.
+Required Arguments
+    --blade_id    <blade ID>
+          Specifies the blade ID.
+    --node_id    <node ID>
+          Specifies the node ID.
+Optional Arguments
+    None
+Usage Modes
+    [OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BladeConsole --blade_id A1
+        --node_id 1
+Notice
+    1. Use BladeSummary command to check Blade ID and Node ID within CMM.

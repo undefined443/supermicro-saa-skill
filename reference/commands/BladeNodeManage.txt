@@ -1,0 +1,41 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the nodes of the Blade system through the CMM.
+Required Arguments
+    --action    <action>
+          Manages the nodes of the Blade system with action:
+          GetSensor
+          GetStatus
+          GetPower
+          SetPower
+          GetIp
+          SetIp
+          GetDhcp
+          SetDhcp
+          GetMac
+          SetMac
+          GetSubnetMask
+          SetSubnetMask
+          GetGateway
+          SetGateway
+          GetName
+          SetName
+          GetUid
+          SetUid
+          GetSystemModel
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BladeNodeManage --action
+        GetSensor -h
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c BladeNodeManage --action
+        GetSensor -h

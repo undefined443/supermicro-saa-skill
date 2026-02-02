@@ -1,0 +1,28 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the power supply unit of managed Blade system through CMM.
+Required Arguments
+    --action    <action>
+          Manages system with action:
+          GetBladePsuInfo
+          GetBladePsuConsumption
+          GetFanSpeed
+          SetFanSpeed
+          GetFanMode
+          SetFanMode
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BladePsuManage --action
+        GetBladePsuInfo -h
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c BladePsuManage --action
+        GetBladePsuInfo -h

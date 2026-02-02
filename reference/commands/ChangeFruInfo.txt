@@ -1,0 +1,98 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates FRU information.
+Required Arguments
+    --value    <assignment value>
+          Updates the value of the given FRU field.
+          If the item is ALL, the format is
+          "<CT>,<CP>,<CS>,<BDT>,<BM>,<BPN>,<BS>,<BP>,<PM>,<PN>,<PPM>,<PV>,<PS>,
+          <PAT>"
+    --item    <item name>
+          Updates the FRU information with given FRU field.
+          CT = Chassis Type
+          CP = Chassis Part Number
+          CS = Chassis Serial Number
+          BDT = Board Mfg. Date/Time ("YYYY/MM/DD HH:MM")
+          BM = Board Manufacturer
+          BPN = Board Product Name
+          BS = Board Serial Name
+          BP = Board Part Number
+          PM = Product Manufacturer
+          PN = Product Name
+          PPM = Product Part/Model Number
+          PV = Product Version
+          PS = Product Serial Number
+          PAT = Asset Tag
+          ALL = All Fields
+    --fru_version    <FRU version>
+          Updates the FRU version.
+    Note:
+        1. Chassis Type(CT):
+        0x01 = Other
+        0x02 = Unknown
+        0x03 = Desktop
+        0x04 = Low Profile Desktop
+        0x05 = Pizza Box
+        0x06 = Mini Tower
+        0x07 = Tower
+        0x08 = Portable
+        0x09 = LapTop
+        0x0A = Notebook
+        0x0B = Hand Held
+        0x0C = Docking Station
+        0x0D = All in One
+        0x0E = Sub Notebook
+        0x0F = Space-saving
+        0x10 = Lunch Box
+        0x11 = Main Server Chassis
+        0x12 = Expansion Chassis
+        0x13 = SubChassis
+        0x14 = Bus Expansion Chassis
+        0x15 = Peripheral Chassis
+        0x16 = RAID Chassis
+        0x17 = Rack Mount Chassis
+        0x18 = Sealed-case PC
+        0x19 = Multi-system chassis
+        0x1A = Compact PCI
+        0x1B = Advanced TCA
+        0x1C = Blade
+        0x1D = Blade Enclosure
+        0x1E = Tablet
+        0x1F = Convertible
+        0x20 = Detachable
+        0x21 = IoT Gateway
+        0x22 = Embedded PC
+        0x23 = Mini PC
+        0x24 = Stick PC
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeFruInfo --item CT
+        --value 0x01
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeFruInfo --fru_version
+        00.01
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeFruInfo --item ALL
+        --value "0x01,2,3,2024/01/01 00:00,5,6,7,8,9,10,11,12,13,14"
+  In-Band
+    # ./saa -c ChangeFruInfo --item CT --value 0x01
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        ChangeFruInfo --item CT --value 0x01 --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeFruInfo --item CT
+        --value 0x01
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c ChangeFruInfo --item CT
+        --value 0x01 --remote_saa /root/saa
+Notice
+    1. Either [--item, --value] or [--fru_version] is required.
+    2. The length of each FRU value should be less than 64 characters.

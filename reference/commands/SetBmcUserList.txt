@@ -1,0 +1,155 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes BMC user related actions.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = Add
+          2 = Del
+          3 = Level
+          4 = SetPwd
+          5 = Test
+          6 = EnableType
+          7 = EnableAccount
+          8 = EditUserName
+Optional Arguments
+    --user_id    <user ID>
+          The BMC user ID.
+    --user_name    <user name>
+          The BMC user name.
+    --current_user_name    <current user name>
+          The current BMC username for user management operations (NVIDIA C2
+          specific).
+    --user_password    <user password>
+          The BMC user password.
+    --user_privilege    <user privilege>
+          The BMC user privilege.
+          For privilege level:
+          Administrator:  4
+          Operator     :  3
+          User         :  2
+          Callback     :  1
+          No Access    : 15
+          The "No Access" privilege level is not supported
+    --user_status    <user enable>
+          Manages the status of a BMC user
+          0 = Disable
+          1 = Enable
+    --account_type    <account type>
+          Supported account types for BMC management.
+          0 = SNMP
+    --account_type_status    <account type status>
+          Manages account type status.
+          0 = Disable
+          1 = Enable
+    --ap    <authentication protocol>
+          The authentication protocol.
+          0 = MD5
+          1 = SHA
+    --pp    <private protocol>
+          The private protocol.
+          0 = DES
+          1 = AES
+    --ak    <authentication key>
+          The authentication key.
+    --pk    <private key>
+          The private key.
+    --manage_account_type    <manage account type>
+          Manages the status of account types.
+          The format is "SNMP:Enable,Redfish:Disable."
+          Supported account types are:
+          1. Redfish
+          2. SNMP
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Add
+        --user_id 3 --user_name Admin123 --user_password aDMIN123
+        --user_privilege 3 --user_status Disable --manage_account_type
+        SNMP:Enable,Redfish:Disable --ap 0 --pp DES --ak Admin123 --pk Admin123
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Del
+        --user_id 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Level
+        --user_id 3 --user_privilege 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action SetPwd
+        --user_id 3 --user_password aDMIN123
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EditUserName --user_id 3 --user_name Admin987
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Add
+        --user_name Admin123 --user_password aDMIN123 --user_privilege 3
+        --user_status Disable
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Del
+        --current_user_name Admin123
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action Level
+        --current_user_name Admin123 --user_privilege 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action SetPwd
+        --current_user_name Admin123 --user_password aDMIN123
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EditUserName --current_user_name Admin123 --user_name Admin987
+  In-Band
+    # ./saa -c SetBmcUserList --action Add --user_id 3 --user_name Admin123
+        --user_password aDMIN123 --user_privilege 3
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action Add
+        --user_id 3 --user_name Admin123 --user_password aDMIN123
+        --user_privilege 3 --user_status Disable --manage_account_type
+        SNMP:Enable,Redfish:Disable --ap 0 --pp DES --ak Admin123 --pk Admin123
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action Test
+        --user_name Admin123 --user_password aDMIN123
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableType --user_id 3 --account_type SNMP --account_type_status enable
+        --ap 0 --pp DES --ak Admin123 --pk Admin123
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableType --user_id 3 --manage_account_type SNMP:Disable,Redfish:Enable
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EditUserName --user_id 3 --user_name Admin987
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action Add
+        --user_name Admin123 --user_password aDMIN123 --user_privilege 3
+        --user_status Disable
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EditUserName --current_user_name Admin123 --user_name Admin987
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetBmcUserList --action Del --user_id 3 --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetBmcUserList --action Level --user_id 3 --user_privilege 3
+        --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SetBmcUserList --action Del --current_user_name Admin123
+        --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SetBmcUserList --action Level --current_user_name Admin123
+        --user_privilege 3 --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBmcUserList --action
+        Test --user_name Admin123 --user_password aDMIN123
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableType --user_id 3 --account_type SNMP --account_type_status enable
+        --ap 0 --pp DES --ak Admin123 --pk Admin123
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableType --user_id 3 --manage_account_type SNMP:Disable,Redfish:Enable
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableAccount --user_id 3 --user_status Disable
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBmcUserList --action
+        EnableAccount --current_user_name Admin123 --user_status Disable
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SetBmcUserList --action SetPwd
+        --user_id 3 --user_password aDMIN123 --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SetBmcUserList --action SetPwd
+        --current_user_name Admin123 --user_password aDMIN123 --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SetBmcUserList --action
+        EnableAccount --user_id 3 --user_status Disable
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SetBmcUserList --action
+        EnableAccount --current_user_name Admin123 --user_status Disable
+Notice
+    1. If you wish to specify the account type when user creation (--action
+    Add), please use the --manage_account_type option.
+    2. If you wish to specify the account status when user creation (--action
+    Add), please use the --user_status option. Default status is Enable.

@@ -1,0 +1,34 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the VROC configuration.
+Required Arguments
+    --file    <file name>
+          Updates the VROC with the given configuration file.
+Optional Arguments
+    --individually
+          Updates each VROC with corresponding configuration file individually.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeVROCCfg --file
+        VROC.cfg.xml
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c ChangeVROCCfg --file VROC.cfg.xml
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c ChangeVROCCfg --file VROC.cfg.xml
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeVROCCfg --file
+        VROC.cfg.xml --individually
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c ChangeVROCCfg --file
+        VROC.cfg.xml
+Notice
+    1. --individually option is required with -l option for multiple OOB usage.

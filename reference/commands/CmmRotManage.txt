@@ -1,0 +1,42 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Execute RoT-related actions.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetInfo
+          2 = UpdateGolden
+          3 = Recover
+          4 = DownloadEvidence
+Optional Arguments
+    --file    <file name>
+          Works with the --action DownloadEvidence option and saves the CMM
+          evidence to a file.
+    --overwrite
+          Works with the --action DownloadEvidence option and overwrites the
+          output file.
+    --redfish
+          Enables pure Redfish support.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+    SFT-DCMS-SINGLE for action Recover and DownloadEvidence
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CmmRotManage --action 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CmmRotManage --action 4 --file
+        evidence.bin.gz
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c CmmRotManage --action
+        GetInfo
+Notice
+    1. Support only on CMM AST2600.
+    2. UpdateGolden action will overwrite golden image with current CMM
+    firmware.
+    3. DownloadEvidence action is only available after automatic or manual CMM
+    recovery.
+    4. The CMM evidence is a compressed gzip file.

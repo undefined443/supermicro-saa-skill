@@ -1,0 +1,36 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates CPLD on NIC.
+Required Arguments
+    --file    <file name>
+          Updates the NIC CPLD with the given CPLD image file.
+Optional Arguments
+    --individually
+          Updates each CPLD on NIC with its corresponding image file
+          individually.
+    --dev_id    <Device ID>
+          Updates the CPLD on NIC with the given NIC ID and CPLD ID. The CPLD
+          for the first NIC will be updated by default.
+          e.g., NIC 1 and CPLD 1: --dev_id 1_1
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateNICCpld --file CPLD.jed
+        --dev_id 1_1
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateNICCpld --file CPLD.jed
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateNICCpld --file CPLD.jed --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateNICCpld --file
+        CPLD.jed
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateNICCpld --file CPLD.jed

@@ -1,0 +1,35 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Uses this command to find and display all BMC devices.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          The file to write, required with --getMACs used
+    --start_ip    <Start IP>
+          Start address of the network to search.
+    --end_ip    <End IP>
+          End address of the network to search.
+    --netmask    <Netmask>
+          Subnet mask of the network to search
+    --getMACs    <Get the MAC addresses of available BMC devices>
+          Retrieves the MAC addresses of the found BMC devices and writesthem to
+          a file.
+    --find_user    <Username for found device>
+          Specifies the username for the found BMC devices. This optionshould be
+          used in conjunction with the --getMACs option.
+    --find_password    <Password for found device>
+          Specifies the password for the found BMC devices. This optionshould be
+          used in conjunction with the --getMACs option.
+Usage Modes
+    [In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  In-Band
+    # ./saa -c FindBmcDevices --start_ip 192.168.34.56 --end_ip 192.168.34.200
+        --netmask 255.255.255.0
+    # ./saa -c FindBmcDevices --start_ip 192.168.34.56 --end_ip 192.168.34.200
+        --netmask 255.255.255.0 --file 123.txt --getMACs

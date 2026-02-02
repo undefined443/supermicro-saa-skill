@@ -1,0 +1,33 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets/Sets the current status of the managed system in prompt.
+Required Arguments
+    --item    <item name>
+          Gets/Sets the prompt value for the given prompt item.
+          1 = all
+          2 = time
+          3 = fwVer
+          4 = username
+          5 = ip
+          6 = mb
+          7 = power
+          8 = acpi
+    --action    <action>
+          Sets action to:
+          1 = Get
+          2 = Set
+Optional Arguments
+    --enable
+          Enables the the prompt value for the specified prompt item.
+    --disable
+          Disables the the prompt value for the specified prompt item.
+Usage Modes
+    [In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  In-Band
+    # ./saa -c Prompt --action Get --item mb
+    # ./saa -c Prompt --action Set --item time --disable

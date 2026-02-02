@@ -1,0 +1,22 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Obtain a summary of Firmware Inventory info from the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --json_view
+          Show the Firmware Inventory info in json format
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetFirmwareInventoryInfo 
+  In-Band
+    # ./saa -c GetFirmwareInventoryInfo -I Redfish_HI -u ADMIN -p ADMIN 
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetFirmwareInventoryInfo 

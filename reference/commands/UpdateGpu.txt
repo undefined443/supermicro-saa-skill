@@ -1,0 +1,125 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates GPU firmware.
+Required Arguments
+    --file    <file name>
+          Updates the GPU firmware file that matches the FW item types.
+    --item    <item name>
+          FW item types of GPU firmware:
+          1 = CEC
+          2 = FPGA
+          3 = HGX
+          4 = PVC_IFWI
+          5 = PVC_PSCBIN
+          6 = PVC_UBB_CPLD
+          7 = PVC_RETIMER
+          8 = PVC_AMC
+          9 = GAUDI_SPI
+          10 = GAUDI_OAM_CPLD
+          11 = GAUDI_RETIMER
+          12 = GAUDI_UBB_CPLD
+          13 = GAUDI_UBB_CPLD2
+          14 = HGX_FPGA
+          15 = HGX_HMC
+          16 = HGX_HMC_EROT
+          17 = HGX_FPGA_EROT
+          18 = HGX_PCIESWITCH
+          19 = HGX_PCIESWITCH_EROT
+          20 = HGX_GPU
+          21 = HGX_GPU_EROT
+          22 = HGX_NVSWITCH
+          23 = HGX_NVSWITCH_EROT
+          24 = HGX_RETIMER
+          25 = MGX_GPU
+          26 = MI300X
+          27 = ONBOARD_RETIMER
+          28 = HGX_NVLINKMANAGEMENTNIC
+          29 = HGX_NVLINKMANAGEMENTNIC_EROT
+          30 = HGX_GPU_INFOROM
+          31 = HGX_CPLD
+          32 = HGX_CPU
+          33 = HGX_CPU_EROT
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --force_update
+          update.
+    --dev_id    <Device ID>
+          Retrieved Device ID with the GetGPUInfo command.
+          For SPI-FW, use the device Address.
+          For HGX Retimer, HGX GPU, HGX GPU ERoT, HGX NVSwitch, HGX NVSwitch
+          ERoT, and OnBoard Retimer, use the device id.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateGpu --item CEC --file
+        GPU_CEC.pkg
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateGpu --item gaudi_retimer
+        --file Retimer.ihx --dev_id 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateGpu --item HGX --file
+        nvfw.pkg --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateGpu --item HGX_RETIMER
+        --file retimer.pkg --dev_id 2,3 --reboot --post_complete
+  In-Band
+    # ./saa -c UpdateGpu --item GAUDI_OAM_CPLD --dev_id 1 --file oam_cpld.svf
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateGpu --item FPGA --file
+        GPU_FPGA.pkg
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateGpu --item HGX --file
+        nvfw.pkg --reboot
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateGpu -item HGX_RETIMER
+        --file retimer.pkg --dev_id 2,3 --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c UpdateGpu
+        --file GPU.ihx --item gaudi_oam_cpld --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateGpu --item FPGA --file GPU_FPGA.pkg --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateGpu --item HGX --file nvfw.pkg --reboot --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateGpu -item HGX_RETIMER --file retimer.pkg --dev_id 2,3
+        --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateGpu --item CEC
+        --file GPU_CEC.pkg
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateGpu --item HGX
+        --file nvfw.pkg --reboot --post_complete
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UpdateGpu --file GPU.ihx
+        --item gaudi_oam_cpld --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateGpu --item FPGA --file
+        GPU_FPGA.pkg --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateGpu --item HGX --file
+        nvfw.pkg --reboot --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateGpu -item HGX_RETIMER
+        --file retimer.pkg --dev_id 2,3 --reboot --remote_saa /root/saa
+Notice
+    1. Supports only on X12/H12 and later platforms.
+    2. For Nvidia firmware package released on specific version, tool will
+    restore retimer settings automatically.
+    3. Supports NVIDIA Delta, NVIDIA Delta Next, Intel GPU Max Series and Intel
+    Gaudi2 Systems firmware update.
+    4. When try to In-band update gaudi_ubb_cpld and guadi_oam_cpld, please
+    check if the tool folder includes the gd2 add-on package, if you haven't
+    obtained the gd2 add-on package yet, please contact Supermicro for
+    assistance.
+    5. In-Band support item : PVC_IFWI, GAUDI_SPI, GAUDI_UBB_CPLD,
+    GAUDI_UBB_CPLD2, GAUDI_OAM_CPLD, PVC_PSCBIN.
+    6. OOB support item : CEC, FPGA, HGX, HGX_FPGA, HGX_RETIMER,HGX_HMC,
+    HGX_HMC_EROT, HGX_FPGA_EROT, HGX_PCIESWITCH, HGX_PCIESWITCH_EROT, HGX_GPU,
+    HGX_GPU_EROT, HGX_CPU, HGX_CPU_EROT, HGX_GPU_INFOROM, HGX_CPLD,
+    HGX_NVSWITCH, HGX_NVSWITCH_EROT, HGX_NVLINKMANAGEMENTNIC,
+    HGX_NVLINKMANAGEMENTNIC_EROT, PVC_UBB_CPLD, PVC_RETIMER, GAUDI_RETIMER,
+    PVC_AMC, MGX_GPU,ONBOARD_RETIMER.
+    7. Please note that HGX related items support all H-series SKUs, i.e., H100,
+    H200 and H800.

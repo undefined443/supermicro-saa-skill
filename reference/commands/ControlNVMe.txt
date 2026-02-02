@@ -1,0 +1,44 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Locates, inserts or removes NVMe SSD drive.
+Required Arguments
+    --dev_id    <Device ID>
+          The NVMe controller ID can be found using the GetNvmeInfo command.
+    --action    <action>
+          Sets action to:
+          1 = Locate
+          2 = StopLocate
+          3 = Insert
+          4 = Remove
+          5 = Rescan
+    --group_id    <Group ID>
+          The NVMe device group ID can be found using the GetNvmeInfo command.
+    --slot    <Slot number>
+          The NVMe slot number can be found using the GetNvmeInfo command.
+Optional Arguments
+    --no_eject    <eject option>
+          Setting the eject option. The default value is 'eject'.
+    --device_name    <HDD Name>
+          The NVMe device name, can be found with GetNvmeInfo and GetSmartData
+          command.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ControlNVMe --dev_id 0
+        --group_id 0 --slot 3 --action Locate
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ControlNVMe --action Locate
+        --device_name vmhba2 --no_eject
+  In-Band
+    # ./saa -c ControlNVMe --action Rescan
+    # ./saa -c ControlNVMe --action Locate --device_name vmhba2
+    # ./saa -c ControlNVMe --action Locate --device_name vmhba2 --no_eject
+    # ./saa -c ControlNVMe --dev_id 0 --group_id 0 --slot 3 --action Locate
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ControlNVMe --dev_id 0
+        --group_id 0 --slot 3 --action Locate

@@ -1,0 +1,25 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the BBP with the given image file.
+Required Arguments
+    --file    <file name>
+          Updates the BBP with the given image file.
+Optional Arguments
+    --skip_check
+          Skips the Blade power status check to force update BBP
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBbp --file BBP.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBbp --file BBP.bin
+        --skip_check
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBbp --file BBP.bin
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBbp --file BBP.bin
+        --skip_check

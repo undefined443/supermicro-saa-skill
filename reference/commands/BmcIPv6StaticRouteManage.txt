@@ -1,0 +1,51 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages BMC IPv6 static route.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetInfo
+          2 = Enable
+          3 = Disable
+          4 = SetStaticRoute
+          5 = Clear
+Optional Arguments
+    --ipv6_ip    <IPv6 IP>
+          Specifies the IPv6 IP address for configuration.
+    --ipv6_prefix_value    <IPv6 prefix value>
+          Specifies IPv6 prefix value for configuration.
+    --ipv6_prefix_len    <IPv6 prefix length>
+          Specifies the IPv6 prefix length for configuration.
+    --router_id    <Router ID>
+          Specifies an IPv6 router for configuration. The value is 1 or 2.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BmcIPv6StaticRouteManage
+        --action GetInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BmcIPv6StaticRouteManage
+        --action SetStaticRoute --ipv6_ip
+        1111:2222:3333:4444:5555:6666:7777:8888 --ipv6_prefix_value 1111:2222::
+        --ipv6_prefix_len 64 --router_id 2
+  In-Band
+    # ./saa -c BmcIPv6StaticRouteManage --action Enable
+    # ./saa -c BmcIPv6StaticRouteManage --action Disable
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        BmcIPv6StaticRouteManage --action Clear --router_id 2
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c BmcIPv6StaticRouteManage
+        --action Clear --router_id 1
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c BmcIPv6StaticRouteManage
+        --action SetStaticRoute --ipv6_ip
+        1111:2222:3333:4444:5555:6666:7777:8888 --ipv6_prefix_value
+        1111:2222:0000:0000:0000:0000:0000:0000 --ipv6_prefix_len 64 --router_id
+        1

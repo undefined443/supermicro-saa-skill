@@ -1,0 +1,61 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates PSU module with the OEM requested signed firmware image.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          PSU firmware file
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --address
+          PSU module address in HEX format (Gets the PSU module slave address
+          from the GetPSUInfo command.)
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --index    <index>
+          PSU module index (Gets the PSU module index from the GetPSUInfo
+          command.)
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePsu --file PSU.fw
+        --address 80
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePsu --file PSU.fw
+        --index 1 --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePsu --file PSU.fw
+        --index all --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePsu --index 1 --reboot
+        --post_complete
+  In-Band
+    # ./saa -c UpdatePsu --file PSU.fw --address 80
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c UpdatePsu
+        --file PSU.fw --address 80 --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePsu --file PSU.fw
+        --index 1 --reboot --post_complete
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePsu --file PSU.fw
+        --index all --reboot --post_complete
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePsu --index 1
+        --reboot --post_complete
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UpdatePsu --file PSU.fw
+        --address 80
+Notice
+    1. System needs to be powered off while updating PSU firmware.
+    2. The "--index all" option can be used to update all PSUs on the system;
+    however, all PSUs must be of the same PSU model and hardware version.
+    3. The "--index" option can be used without the "--file" option, provided
+    that the PSU firmware image is placed in the designated directory within
+    SAA. Example: <SAA path>/<PSU model name>/<PSU HW revision>/<PSU firmware
+    image>
+    4. Options "--reboot" and "--post_complete" are only supported when using
+    the option "--index."

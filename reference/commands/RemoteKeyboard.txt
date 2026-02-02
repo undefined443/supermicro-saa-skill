@@ -1,0 +1,25 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sends keyboard operations to managed system.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads keyboard operations from specified file.
+    --showall
+          Shows all supported keys and some samples.
+Usage Modes
+    [OOB] [In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RemoteKeyboard --showall
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RemoteKeyboard --file
+        keyboard.txt
+  In-Band
+    # ./saa -c RemoteKeyboard --showall
+Notice
+    1. The BMC console interface needs to be switched to JAVA plug-in.

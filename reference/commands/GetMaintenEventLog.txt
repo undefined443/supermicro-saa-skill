@@ -1,0 +1,50 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the Maintenance Event Log of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Saves the Maintenance Event Log to a file.
+          Prints the Maintenance Event Log on screen if the file-saving function
+          is not available.
+    --st    <start time>
+          Enters the start time YYYYMMDD.
+    --et    <end time>
+          Enters the end time YYYYMMDD.
+    --count    <Count>
+          Enters the log count.
+          If count number equal zero will show all.
+    --overwrite
+          Overwrites the output file.
+    --json_view
+          Sets the output format to JSON.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetMaintenEventLog --st
+        20200601 --et 20200602 --count 5 --file MaintenEventLog.txt --overwrite
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetMaintenEventLog --st
+        20200601 --et 20200602 --count 5 --file MaintenEventLog.txt --overwrite
+        --json_view
+  In-Band
+    # ./saa -c GetMaintenEventLog --file MaintenEventLog.txt --overwrite
+    # ./saa -c GetMaintenEventLog --file MaintenEventLog.txt --overwrite
+        --json_view
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetMaintenEventLog --file MaintenEventLog.txt --overwrite --remote_saa
+        /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetMaintenEventLog --st
+        20200601 --et 20200602 --count 5 --file MaintenEventLog.txt --overwrite
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetMaintenEventLog --file
+        MaintenEventLog.txt --overwrite

@@ -1,0 +1,54 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Uploads BMC configuration to the managed system.
+Required Arguments
+    --file    <file name>
+          Uploads the BMC with the given configuration file.
+Optional Arguments
+    --individually
+          Uploads each BMC with corresponding configuration file individually.
+    --format    <file format>
+          Works with the --file option to upload BMC configuration from file in
+          one of the following specified formats:
+          BINARY = Binary format
+          TEXT = Text format
+          If the --format option is not provided, the default format is BINARY.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UploadBmcCfg --format BINARY
+        --file BmcCfg.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UploadBmcCfg --format TEXT
+        --file BmcCfg.xml
+  In-Band
+    # ./saa -c UploadBmcCfg --format BINARY --file BmcCfg.bin
+    # ./saa -c UploadBmcCfg --format TEXT --file BmcCfg.xml
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        UploadBmcCfg --format BINARY --file BmcCfg.bin --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        UploadBmcCfg --format TEXT --file BmcCfg.xml --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UploadBmcCfg --format
+        BINARY --file BmcCfg.bin --individually
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UploadBmcCfg --format TEXT
+        --file BmcCfg.xml --individually
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UploadBmcCfg --format TEXT
+        --file BmcCfg.xml
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UploadBmcCfg --format BINARY
+        --file BmcCfg.bin --individually --remote_saa /root/saa
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UploadBmcCfg --format TEXT
+        --file BmcCfg.xml --individually --remote_saa /root/saa
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UploadBmcCfg --format TEXT
+        --file BmcCfg.xml --remote_saa /root/saa
+Notice
+    1. --individually option should be used with -l option for multiple systems
+    usage.

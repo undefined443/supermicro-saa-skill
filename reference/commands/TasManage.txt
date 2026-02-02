@@ -1,0 +1,42 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Execute TAS-related actions.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          GetInfo
+          Pause
+          Resume
+          Refresh
+          Clear
+          SetPeriod
+Optional Arguments
+    --period    <Period>
+          Sets the TAS update period in seconds (between 5 and 60).
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TasManage --action GetInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TasManage --action Refresh
+  In-Band
+    # ./saa -c TasManage --action Clear
+    # ./saa -c TasManage --action Resume
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TasManage
+        --action GetInfo
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TasManage
+        --action Refresh
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TasManage --action Refresh
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TasManage --action
+        SetPeriod --period 5
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TasManage --action GetInfo
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TasManage --action Refresh

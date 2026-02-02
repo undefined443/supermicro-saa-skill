@@ -1,0 +1,21 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates CDU firmware (Web I/F, Sensor and Common files).
+Required Arguments
+    --file    <file name>
+          Updates CDU firmware with the given firmware bundle file.
+Optional Arguments
+    --redfish
+          Enables support for pure Redfish.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateCDU --file CDU.zip
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateCDU --file CDU.zip

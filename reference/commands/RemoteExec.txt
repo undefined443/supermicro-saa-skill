@@ -1,0 +1,28 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes shell commands on a remote system.
+Required Arguments
+    --remote_cmd    <Remote command>
+          Enters the commands to be executed on a remote system.
+Optional Arguments
+    --file    <file name>
+          Transfers the file(s) to a remote system.
+Usage Modes
+    [Remote In-Band] [Multiple Systems Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c RemoteExec
+        --remote_cmd 'cd supermicro/sum_remote_inband; sh test.sh' --file
+        test.sh
+Multiple Systems
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c RemoteExec --remote_cmd 'cd
+        supermicro/sum_remote_inband; sh test.sh' --file test.sh
+Notice
+    1. By default, the file(s) are saved in the remote system's user directory
+    under the path "supermicro/sum_remote_inband/".
+    2. The remote system's stderr is redirected to local system's stdout.

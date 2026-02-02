@@ -1,0 +1,33 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the NVMe smart data of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --json_view
+          Sets the output format to JSON.
+    --device_name    <HDD Name>
+          Gets the specific device smart data
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetSmartData 
+  In-Band
+    # ./saa -c GetSmartData 
+    # ./saa -c GetSmartData --device_name nvme4
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetSmartData 
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetSmartData --device_name nvme4
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetSmartData 
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetSmartData 

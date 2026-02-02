@@ -1,0 +1,25 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sets system lockdown mode.
+Required Arguments
+    --lock    <yes/no>
+          <yes/no> Locks/Unlocks the managed system.
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --post_complete
+          Waits for the managed system's POST to complete after rebooting.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetLockdownMode --lock yes
+        --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetLockdownMode --lock no
+        --reboot

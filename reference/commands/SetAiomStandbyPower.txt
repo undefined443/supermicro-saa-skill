@@ -1,0 +1,36 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sets AIOM Standby Power configuration of the managed system. This command
+    provides On/Off options to control for the AIOM network card and Standby
+    Fan(s), with On by default.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = On
+          2 = Off
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetAiomStandbyPower --action
+        On
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetAiomStandbyPower --action
+        Off
+  In-Band
+    # ./saa -c SetAiomStandbyPower -I Redfish_HI -u ADMIN -p ADMIN --action On
+    # ./saa -c SetAiomStandbyPower -I Redfish_HI -u ADMIN -p ADMIN --action Off
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetAiomStandbyPower -I Remote_INB -u ADMIN -p ADMIN 
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetAiomStandbyPower
+        --action On
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetAiomStandbyPower
+        --action Off

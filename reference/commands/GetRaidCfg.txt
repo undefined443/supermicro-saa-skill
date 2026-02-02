@@ -1,0 +1,38 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the RAID configuration of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Saves the configuration to a file.
+          Prints the RAID configuration on screen if the file-saving function is
+          not available.
+    --overwrite
+          Overwrites the output file.
+    --controller    <Controller>
+          <Broadcom/Marvell> Vendor of RAID controller.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetRaidCfg  --file RAID.cfg
+        --overwrite
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetRaidCfg  --file RAID.cfg
+  In-Band
+    # ./saa -c GetRaidCfg  --file RAID.cfg --overwrite
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c GetRaidCfg
+        --file RAID.cfg --overwrite
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetRaidCfg  --file
+        RAID.cfg --overwrite
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetRaidCfg  --file RAID.cfg
+        --overwrite

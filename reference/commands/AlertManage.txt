@@ -1,0 +1,49 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets and query SNMP trap message.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = listMessage
+          2 = sendTest(only support OOB & Redfish_HI)
+    --message_type    <List of message type>
+          Sets message type to:
+          1 = snmpv1
+          3 = snmpv3
+          4 = redfish
+Optional Arguments
+    --after    <datetime>
+          Queries trap messages after specified time.
+    --before    <datetime>
+          Queries trap messages before specified time.
+    --ip    <Sender IP>
+          Queries trap message of the specified IP address.
+    --page    <Page>
+          Sets Page number and the default value is first page.
+    --limit    <limit>
+          Sets quantity of data with one page,and range is 10 to 100
+          The default value is twenty.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c AlertManage --action sendTest
+  In-Band
+    # ./saa -c AlertManage --action listmessage --message_type snmpv1
+    # ./saa -c AlertManage --action listmessage --message_type 3 --limit 10
+        --page 3
+    # ./saa -c AlertManage --action listmessage --message_type 3 --ip 127.0.0.1
+    # ./saa -c AlertManage --action listmessage --message_type 3 --after
+        "2023-1-1 00:00:00"
+    # ./saa -c AlertManage --action listmessage --message_type 3 --after
+        "2023-1-1 00:00:00" --before "2023-1-1 14:00:00"
+    # ./saa -c AlertManage --action listmessage --message_type 3 --after
+        "2023-1-1 00:00:00" --before "2023-1-1 14:00:00" --limit 10 --page 3
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c AlertManage --action sendTest
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c AlertManage --action
+        sendTest

@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets/Deletes the Redfish Host Interface login bootstrapping account.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = CreateAccount
+          2 = DeleteAccount
+          3 = CheckAccount
+Optional Arguments
+    --user_name    <user name>
+          Delete bootstrapping account with user name.
+Usage Modes
+    [In-Band] [Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  In-Band
+    # ./saa -c BootStrappingAccount --action 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c BootStrappingAccount --action 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c BootStrappingAccount --action 3
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c BootStrappingAccount --action 2
+        --user_name 'xxxxxxxxxxxxxxx'
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        BootStrappingAccount --action 2 --user_name 'xxxxxxxxxxxxxxx'
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c BootStrappingAccount --action 1
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c BootStrappingAccount --action 3
+Notice
+    1. Delete bootstrapping account user name must be put into single quotation
+    marks.
+    2. System reboot or BMC reset will automatically delete bootstrapping
+    account.
+    3. Need administrator privileges to delete bootstrapping account.
+    4. Only support local in-band usage.

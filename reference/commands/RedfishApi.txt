@@ -1,0 +1,65 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Calls Redfish API directly.
+Required Arguments
+    --api    <API path>
+          Redfish API path.
+Optional Arguments
+    -v
+          Verbose output: prints the response header.
+    --file    <file name>
+          Outputs the result to file.
+    --overwrite
+          Overwrites the output file.
+    --individually
+          Reads the request body from the file individually. (Only support for
+          Multiple systems OOB usage) 
+    --json_view
+          Only display command output in json format without any
+          informative/warning messages. If there's any error thenerror message
+          will be displayed that wont be in json format.Using along with
+          --no_banner output result in json format.
+    --request    <HTTP method>
+          HTTP method (GET, POST, PATCH)
+    --data    <Request body>
+          Request body.
+    --retry    <Number of retry>
+          Number of retry, default is 3.
+    --multipart    <multipart/form-data>
+          each multipart/form-data should be joined by && --multipart 
+          'UpdateParameters={"Targets": ["/redfish/v1/Managers/1"],
+          "@Redfish.OperationApplyTime": "Immediate"} &&
+          UpdateFile=@BMC_X13AST2600-F201MS_20240308_01.02.01_STDsp.bin
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RedfishApi --api
+        /redfish/v1/TaskService
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RedfishApi --request PATCH
+        --api /redfish/v1/TaskService --data "{"ServiceEnabled":true}"
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RedfishApi --request PATCH
+        --api /redfish/v1/TaskService --data @input_file --file output_file
+  In-Band
+    # ./saa -c RedfishApi -I Redfish_HI -u ADMIN -p ADMIN --api
+        /redfish/v1/TaskService
+    # ./saa -c RedfishApi -I Redfish_HI -u ADMIN -p ADMIN --request PATCH --api
+        /redfish/v1/TaskService --data "{"ServiceEnabled":true}"
+    # ./saa -c RedfishApi -I Redfish_HI -u ADMIN -p ADMIN --request PATCH --api
+        /redfish/v1/TaskService --data @input_file --file output_file
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RedfishApi --api
+        /redfish/v1/TaskService
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RedfishApi --request PATCH
+        --api /redfish/v1/TaskService --data "{"ServiceEnabled":true}"
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c RedfishApi --request PATCH
+        --api /redfish/v1/TaskService --data @input_file --file output_file
+        --individually
+Notice
+    1. For in-band usage, -I Redfish_HI is required
+    2. To read the request body from file, please use --data @input_file

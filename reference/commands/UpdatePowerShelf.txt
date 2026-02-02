@@ -1,0 +1,25 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates power unit firmware in the managed Power Shelf system
+Required Arguments
+    --file    <file name>
+          Specifies the firmware file, including the path
+    --dev_id    <Device ID>
+          Specifies the device ID used to designate which power unit will be
+          updated. Supported values: [0–5].
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePowerShelf --dev_id 0
+        --file ./SP-2552-1R_0608_Bootloader.D2DAppA.tar
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePowerShelf --dev_id
+        5 --file ./SP-2552-1R_0608_Bootloader.D2DAppA.tar

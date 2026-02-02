@@ -1,0 +1,31 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages Intel Node Manager of managed system.
+Required Arguments
+    --type    <type>
+          Manages Intel Node Manager with a type:
+          NM20
+          BMC10
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GeneralNmManage --type NM20 -h
+  In-Band
+    # ./saa -c GeneralNmManage --type NM20 -h
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GeneralNmManage --type NM20 -h
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GeneralNmManage --type
+        NM20 -h
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GeneralNmManage --type NM20 -h

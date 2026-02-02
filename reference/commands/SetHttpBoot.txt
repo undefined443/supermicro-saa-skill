@@ -1,0 +1,86 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Boots into an ISO image from the image file server.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Upload the TLS certificate with type .cer,.der,.crt,.pem format.
+    --current_password    <current password>
+          Checks the current BIOS Administrator password.
+    --boot_name    <boot description>
+          Description for HTTP boot.
+    --boot_lan    <boot LAN port>
+          Enters the LAN port for HTTP boot.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --boot_clean
+          Cleans all HTTP boot option.
+    --disable_hostname_check
+          Disables checking whether the host name of the TLS certificate matches
+          the host name provided by the remote server for HTTPS boot.
+    --image_url    <URL>
+          The URL to access the shared image file.
+          URL format: 'http://<IPv4 or IPv6>/<shared point>/<file path>'
+          or 'https://<IPv4 or IPv6>/<shared point>/<file path>'
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --cur_pw_file    <Current password file>
+          The specified file path to read current password.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+    SFT-DCMS-SINGLE for TLS upload configuration.
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetHttpBoot --boot_name
+        bootDescription --image_url http://192.168.12.78/iso/boot.iso --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetHttpBoot --boot_lan 2
+        --boot_name bootDescription --file TLS.crt --image_url
+        https://[1234:ab5:0:c678:9012:345d:6e78:9f0a]/iso/boot.iso --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetHttpBoot --boot_clean
+        --reboot
+  In-Band
+    # ./saa -c SetHttpBoot --boot_name bootDescription --image_url
+        http://192.168.12.78/iso/boot.iso --reboot
+    # ./saa -c SetHttpBoot --boot_lan 2 --boot_name bootDescription --file
+        TLS.crt--image_url
+        http://[1234:ab5:0:c678:9012:345d:6e78:9f0a]/iso/boot.iso --reboot
+    # ./saa -c SetHttpBoot --boot_clean --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetHttpBoot --boot_name bootDescription --image_url
+        http://192.168.12.78/iso/boot.iso --reboot --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetHttpBoot --boot_lan 2 --boot_name bootDescription --file TLS.crt
+        --image_url https://[1234:ab5:0:c678:9012:345d:6e78:9f0a]/iso/boot.iso
+        --reboot --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetHttpBoot --boot_clean --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetHttpBoot --boot_name
+        bootDescription --image_url http://192.168.12.78/iso/boot.iso --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetHttpBoot --boot_lan 2
+        --boot_name bootDescription --file TLS.crt --image_url
+        https://[1234:ab5:0:c678:9012:345d:6e78:9f0a]/iso/boot.iso --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetHttpBoot --boot_clean
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SetHttpBoot --boot_name
+        bootDescription --image_url http://192.168.12.78/iso/boot.iso --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SetHttpBoot --boot_lan 2
+        --boot_name bootDescription --file TLS.crt --image_url
+        https://[1234:ab5:0:c678:9012:345d:6e78:9f0a]/iso/boot.iso --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SetHttpBoot --boot_clean
+        --reboot
+Notice
+    1. HTTPS boot needs to provide the clients with a valid TLS certificate
+    signed by a trusted Certification Authority. Please use "ChangeBiosCfg"
+    command to upload the TLS certificate.
+    2. If this BIOS supports hostname checking,and hostname checking is enabled
+    in the default settings.

@@ -1,0 +1,112 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Attests managed system and manages measurements.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          Dump
+          List
+          Download
+          Delete
+          GetInfo
+          Compare
+    Note:
+        1. Uses action Dump to dump and download measurement from managed
+        system.
+        2. Uses action List to list existing measurement files on the managed
+        system.
+        3. Uses action Download to download existing measurement file on the
+        managed system.
+        4. Uses action Delete to delete existing measurement file on the managed
+        system.
+        5. Uses action GetInfo to get information from local measurement file.
+        6. Uses action Compare to compare measurement form managed system or
+        local file with a reference measurement file.
+Optional Arguments
+    --file    <file name>
+          File name for measurement file.
+    --item    <item name>
+          Prints the specified item for the measurement file. (Only supported
+          with the GetInfo action)
+    --overwrite
+          Overwrites the downloaded or extracted file.
+    --showall
+          Prints all information from the measurement file. (Only supported with
+          the GetInfo action)
+    --file_only
+          Gets information from the local measurement file. (Required option for
+          the GetInfo action)
+    --nonce    <nonce>
+          Specify nonce for action Dump.
+    --ref    <file name>
+          Reference measurement file for comparison. (Only supported with the
+          Compare action)
+    --root_cert    <file name>
+          Inputs the public certificate of Root CA to verify the certificate
+          chain in measurement file. (Only supported with the GetInfo action)
+    --extract_certs    <file name>
+          Extracts endpoint certificate chain from the local measurement file.
+          (Only supported with the GetInfo action)
+    --type    <type>
+          Specify dump type for action Dump.
+          Supported types:
+          MB
+    --verify
+          Throw exception for file signature/certificate chain verification
+          fail.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE and SFT-SDDC-SINGLE for action Compare
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Attestation --action Dump
+        --file Measurement.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Attestation --action Delete
+        --file Measurement.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Attestation --action Compare
+        --ref Measurement.bin
+  In-Band
+    # ./saa -c Attestation --action GetInfo --file_only --file Measurement.bin
+    # ./saa -c Attestation --action GetInfo --file_only --file Measurement.bin
+        --showall
+    # ./saa -c Attestation --action GetInfo --file_only --file Measurement.bin
+        --item BMC_ACT_FW_VER
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c Attestation --action List
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c Attestation --action Download
+        --file Measurement.bin
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        Attestation --action GetInfo --file_only --file Measurement.bin
+        --showall
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        Attestation --action GetInfo --file_only --file Measurement.bin
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        Attestation --action GetInfo --file_only --file Measurement.bin --item
+        BMC_ACT_FW_VER
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c Attestation --action List
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c Attestation --action Download --file Measurement.bin
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c Attestation --action Dump
+        --file Measurement.bin
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c Attestation --action List
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c Attestation --action
+        Delete
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c Attestation --action Dump
+        --file Measurement.bin
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c Attestation --action List
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c Attestation --action Delete
+Notice
+    1. When using --action Dump without --nonce, current date time will be used
+    as default nonce.
+    2. When using --action Dump without --file, dumped file will be save with
+    the same filename as on managed system.
+    3. When using --action Download, downloaded file will be save with the same
+    filename as on managed system.

@@ -1,0 +1,24 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the Compute Usage Per Second(CUPS) of managed system.
+Required Arguments
+    --type    <type>
+          Manages Compute Usage Per Second(CUPS) with type:
+          NM30
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NmCupsManage --type NM30 -h
+  In-Band
+    # ./saa -c NmCupsManage --type NM30 -h
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c NmCupsManage --type NM30
+        -h

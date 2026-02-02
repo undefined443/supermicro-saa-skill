@@ -1,0 +1,31 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the CMM information of the managed system/input CMM image file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the CMM information from an input CMM image file.
+    --individually
+          Gets each CMM with its corresponding image file individually.
+    --showall
+          Prints BIOS, BMC and ARM SAA information of the managed Blade system.
+    --json_view
+          Sets the output format to JSON.
+    --file_only
+          Works with option --file, and only reads CMM information from the
+          input image file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetCmmInfo --file CMM.bin
+  In-Band
+    # ./saa -c GetCmmInfo --file CMM.bin --file_only
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetCmmInfo --file CMM.bin

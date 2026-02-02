@@ -1,0 +1,103 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Securely erases RAID HDDs in RAID storage system.
+Required Arguments
+    None
+Optional Arguments
+    --dev_id    <Device ID>
+          A RAID controller ID for secure erase.
+    --enc_id    <Enclosure ID>
+          Enclosure ID list or "ALL" in the RAID controller for secure erase.
+    --dsk_id    <Disk ID>
+          Disk ID list or "ALL" in the RAID controller secure erase.
+    --tsk_id    <Task ID>
+          Accesses the progress of secure erase.
+    --abort
+          Abort secure-erase operation.
+    --sync
+          Shows the current progress of the secure-erase operation in RAID
+          controller.
+    --json_view
+          Sets the output format to JSON.
+    --precheck
+          Shows the details of all disk ID list in the RAID controller.
+    --type    <type>
+          Vendor/Mode of RAID controller to do secure erase action: 
+          Broadcom IR mode = BRCM_IR
+          Broadcom IT mode = BRCM_IT
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --precheck
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --sync
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id ALL --dsk_id 0,1,2 --sync
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --type BRCM_IR --sync
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id ALL --dsk_id 0,1,2 --abort
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SecureEraseRaidHdd --tsk_id
+        3,4,5 --sync
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SecureEraseRaidHdd --precheck
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --type BRCM_IR --sync
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --abort
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SecureEraseRaidHdd --tsk_id 3,4,5
+        --sync
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SecureEraseRaidHdd --precheck --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SecureEraseRaidHdd --dev_id 0 --enc_id 0,1,2 --dsk_id 0,1,2
+        --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SecureEraseRaidHdd --dev_id 0 --enc_id 0,1,2 --dsk_id 0,1,2
+        --type BRCM_IR --sync --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SecureEraseRaidHdd --dev_id 0 --enc_id 0,1,2 --dsk_id 0,1,2
+        --abort --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c SecureEraseRaidHdd --tsk_id 3,4,5 --sync --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseRaidHdd
+        --precheck
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseRaidHdd
+        --dev_id 0 --enc_id ALL --dsk_id ALL --sync
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseRaidHdd
+        --dev_id 0 --enc_id 0,1,2 --dsk_id 0,1,2 --type BRCM_IR --sync
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseRaidHdd
+        --dev_id 0 --enc_id ALL --dsk_id ALL --abort
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SecureEraseRaidHdd
+        --tsk_id 4,5,6
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SecureEraseRaidHdd --precheck
+        --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --type BRCM_IR --sync --remote_saa
+        /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SecureEraseRaidHdd --dev_id 0
+        --enc_id 0,1,2 --dsk_id 0,1,2 --abort --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c SecureEraseRaidHdd --tsk_id
+        3,4,5 --sync --remote_saa /root/saa
+Notice
+    1. Securely erasing starts with using --dev_id, --enc_id and --dsk_id
+    options. --tsk_id and --abort option can be used only after issuing
+    Secure-Erase action.
+    2. In single-node/multi-node, default is asynchronous mode and use --tsk_id
+    option to check current securely erasing progress.
+    3. There is a FW dependency for secure erase action on Broadcom IT-mode RAID
+    controller.

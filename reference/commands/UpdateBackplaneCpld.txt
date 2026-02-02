@@ -1,0 +1,62 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates Backplane CPLD.
+Required Arguments
+    --file    <file name>
+          Updates the Backplane CPLD with the given FW image file.
+    --manual_ejected
+          Confirmed that all drives on backplane have been ejected manually.
+Optional Arguments
+    --reboot
+          Forces the managed system to power cycle after operation.
+    --individually
+          Updates each backplane CPLD with its corresponding configuration file
+          individually.
+    --dev_id    <Device ID>
+          Sets the CPLD index. The default value is 1.
+    --post_complete
+          Waits for the managed system's POST to complete after reboot.
+    --update_list    <index:file name>
+          Update multiple backplane CPLDs in one command, and use "," to
+          distinguish items.
+    --index    <index>
+          Updates the specific Backplane CPLD with the given index.
+    --upgrade_only
+          Firmware updates are only performed when the version is newer.
+    --check_reboot_required
+          Displays a warning message when a system reboot or power cycle is
+          required.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBackplaneCpld --file
+        Backplane_CPLD.jed --manual_ejected
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBackplaneCpld
+        --update_list 0:Backplane_CPLD.jed,1:Backplane_CPLD.jed --manual_ejected
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateBackplaneCpld --file
+        Backplane_CPLD.jed --manual_ejected --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateBackplaneCpld --file Backplane_CPLD.jed --manual_ejected
+        --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBackplaneCpld --file
+        Backplane_CPLD.jed --manual_ejected
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBackplaneCpld
+        --update_list 0:Backplane_CPLD.jed,1:Backplane_CPLD.jed --manual_ejected
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateBackplaneCpld --file
+        Backplane_CPLD.jed --manual_ejected --reboot
+Notice
+    1. Support only on X12/H12 and later platforms with backplane installed.
+    (except H12 non-RoT systems.)
+    2. All drives on backplane will be force ejected due to backplane reset
+    after update.

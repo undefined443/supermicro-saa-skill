@@ -1,0 +1,83 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Sets boot Option.
+Required Arguments
+    --device_type    <Device Type ID>
+          0: No Override
+
+          Sets the Device_Type to the following numbers for Legacy Device:
+          1: PXE
+          2: Hard Drive
+          3: CD DVD
+          4: BIOS Setup
+          5: USB Key
+          6: Virtual USB Hard Drive
+          7: Virtual Floppy
+          8: ISO Image
+
+          Sets the Device_Type to the following numbers for UEFI Device
+          9: UEFI: Hard Drive
+          10: UEFI: CD DVD
+          11: UEFI: USB Key
+          12: Virtual UEFI: USB Hard Drive
+          13: UEFI: ISO Image
+          14: UEFI: PXE
+          15: UEFI: Floppy|Virtual Floppy
+          16: UEFI: BIOS Shell
+Optional Arguments
+    --action    <action>
+          Sets power action with:
+          0 = up
+          1 = down
+          2 = cycle
+          3 = reset
+          4 = softshutdown
+          5 = reboot
+          6 = accycle
+          7 = nmi
+          8 = on
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --next_boot_only    <Enable/Disable>
+          Sets NextBootOnly status for non-GB200 platforms
+          Valid options are: 
+          - Enable: Enable the boot override. 
+          - Disable: Disable the boot override. 
+          The default value is Enable.
+    --boot_override_mode    <Set boot override mode>
+          Sets BootSourceOverride status in GB200 
+          Valid options are: 
+          - Once: The boot override will be applied only once. 
+          - Continuous: The boot override will be applied continuously. 
+          - Disabled: The boot override is disabled. 
+          The default value is Once.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBootOption --next_boot_only
+        enable --device_type 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SetBootOption --next_boot_only
+        0 --device_type 1
+  In-Band
+    # ./saa -c SetBootOption --device_type 1
+    # ./saa -c SetBootOption --next_boot_only enable --device_type 1
+    # ./saa -c SetBootOption --next_boot_only 1 --device_type 1
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetBootOption --device_type 1
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetBootOption --device_type 1 --next_boot_only enable
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        SetBootOption --device_type 1 --next_boot_only 1
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SetBootOption
+        --device_type 1
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SetBootOption --device_type 1

@@ -1,0 +1,46 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Performs the Operations related to Nv Switch Component and System Firmware
+    Management.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetFwInfo
+          2 = UpdateFw
+          3 = GetNvosInfo
+          4 = ShowNvosSysImageList
+          5 = UpdateNvosSysImage
+Optional Arguments
+    --file    <file name>
+          Firmware File to Update.
+    --reboot
+          Flag to proceed for Rebooting the NV Switch after successful firmware
+          update.
+    --comp    <COMPONENT ID>
+          The Component Id of the Nv Switch to Update or Get Information.
+Usage Modes
+    [OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetFwInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetFwInfo --json_view
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetFwInfo --comp bmc
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetFwInfo --comp bmc --json_view
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        UpdateFw --file erot.fwpkg --comp erot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetNvosInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        GetNvosInfo --json_view
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        ShowNvosSysImageList
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c NvSwitchManage --action
+        UpdateNvosSysImage --file nvos.bin

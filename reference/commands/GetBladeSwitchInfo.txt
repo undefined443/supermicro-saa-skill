@@ -1,0 +1,36 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the switch information of the managed system/input switch image file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the switch information from an input switch image file.
+    --dev_id    <Device ID>
+          Assigns switch index.
+          Switch index: [A1,A2,B1,B2] or [ALL]
+    --json_view
+          Sets the output format to JSON.
+    --file_only
+          Works with --file, and only reads switch image information from the
+          input image file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetBladeSwitchInfo --file
+        Switch.bin
+  In-Band
+    # ./saa -c GetBladeSwitchInfo --file Switch.bin --file_only
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetBladeSwitchInfo --file
+        Switch.bin
+Notice
+    1. SBM-25G-P10 and BMB-25G-P10 are the same switch module.
+    2. Option --file only supports to parse
+    SBM-25G-P10/BMB-25G-P10/MBM-XEM-002/MBM-GEM-004/SBM-25G-100 firmware image.

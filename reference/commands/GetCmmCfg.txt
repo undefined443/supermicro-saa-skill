@@ -1,0 +1,41 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the CMM configuration of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Saves the configuration to a file.
+          Prints the CMM configuration on screen if the file-saving function is
+          not available.
+    --download
+          Downloads the current CMM configuration file that supports profile
+          update from CMM.
+    --profile_repo
+          Downloads existing CMM profile from CMM.
+    --overwrite
+          Overwrites the output file.
+    --action    <action>
+          Sets the action of each XML table. Acceptable option: None or Change.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetCmmCfg --file CmmCfg.xml
+        --overwrite
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetCmmCfg --download --file
+        CmmCfg.xml --overwrite
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetCmmCfg --download
+        --profile_repo --file CmmCfg_Profile.xml --overwrite
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetCmmCfg --file
+        CmmCfg.xml --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetCmmCfg --download
+        --file CmmCfg.xml --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetCmmCfg --download
+        --profile_repo --file CmmCfg_Profile.xml --overwrite

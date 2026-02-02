@@ -1,0 +1,58 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates switch firmware.
+Required Arguments
+    --file    <file name>
+          Updates switch firmware with the given firmware file.
+Optional Arguments
+    --switch_user    <Switch user ID>
+          Assigns switch user when updating through CMM.
+    --switch_pw    <Switch user password>
+          Assigns switch password when updating through CMM.
+    --reboot
+          Forces the switch to reboot or power up after operation.
+    --individually
+          Updates each switch module with corresponding firmware image
+          individually.
+    --dev_id    <Device ID>
+          Assigns switch index when updating through CMM.
+          Switch index: [A1,A2,B1,B2] or [ALL]
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBladeSwitch --file
+        switch.bin
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBladeSwitch --file
+        switch.bin --dev_id A1 --switch_user ADMIN --switch_pw ADMIN
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBladeSwitch --file
+        switch.bin
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBladeSwitch --file
+        switch.bin --dev_id A1 --switch_user ADMIN --switch_pw ADMIN
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBladeSwitch --file
+        switch.bin --individually
+Notice
+    1. The command with --dev_id, --switch_user and --switch_pw options is to
+    update the switch firmware with the specified device ID and CMM IP.
+    2. The command without --dev_id, --switch_user and --switch_pw options is to
+    update switch firmware with switch IP.
+    3. The firmware version of switch module SBM-25G-P10 must be equal to or
+    greater than 1.0.0.10.
+    4. The firmware version of switch module MBM-XEM-002 must be equal to or
+    greater than 2.2.1.34.
+    5. The firmware version of switch module MBM-GEM-004 must be equal to or
+    greater than 1.3.0.8.
+    6. The firmware version of switch module SBM-25G-100 must be equal to or
+    greater than 1.4.0.11.
+    7. Switch module must be rebooted to take effect.
+    8. If the option --reboot is not set, you can use the RebootBladeSwitch
+    command to reboot the switch module after UpdateBladeSwitch command is
+    completed.
+    9. Option --inidvidually should be used with -l option for multiple remote
+    update usage.

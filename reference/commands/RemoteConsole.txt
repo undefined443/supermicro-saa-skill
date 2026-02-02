@@ -1,0 +1,20 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Remote console.
+Required Arguments
+    None
+Optional Arguments
+    None
+Usage Modes
+    [OOB] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c RemoteConsole 
+Notice
+    1. The BMC console interface needs to be switched to HTML5.
+    2. Must be used on a system with a graphical user interface. If your system
+    does not have a graphical user interface, this command will not work.

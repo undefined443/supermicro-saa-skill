@@ -1,0 +1,37 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the CMM with the given image file.
+Required Arguments
+    --file    <file name>
+          Updates the CMM with the given image file.
+Optional Arguments
+    --individually
+          Updates each CMM with its corresponding image file individually.
+    --overwrite_cfg
+          Overwrites the current CMM configurations, including network settings,
+          using the default factory values in the given CMM image file. This
+          might cause the IPMI connection to be lost.
+    --overwrite_sdr
+          Overwrites the current CMM SDR data.
+    --overwrite_ssl
+          Overwrites the current CMM SSL configuration.
+    --backup
+          Backs up the current CMM image. (Only supported by the RoT systems.)
+    --cmm_boot_check
+          Checks if the CMM has booted up after a reset.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateCmm --file CMM.bin
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateCmm --file CMM.bin
+Notice
+    1. --overwrite_sdr and --overwrite_ssl options are supported by
+    "CSE-947HE2C-R2K05JBOD". Other CMM systems applied these options won't take
+    effect.

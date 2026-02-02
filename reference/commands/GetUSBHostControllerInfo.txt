@@ -1,0 +1,71 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the USB Host Controller information of the managed system/input USB
+    Host Controller image file or config file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the USB Host Controller information from an input USB Host
+          Controller image file.
+    --file_only
+          Works with --file, and only reads USB Host Controller information from
+          the input image file or config file.
+    --cfg_file    <SDSi-agent config file>
+          Reads the USB Host Controller config information from an input USB
+          Host Controller config file.
+Usage Modes
+    [In-Band] [Remote In-Band] [Multiple Systems Remote In-Band] 
+Node Product Key Required
+Examples
+Single System
+  In-Band
+    # ./saa -c GetUSBHostControllerInfo 
+    # ./saa -c GetUSBHostControllerInfo --file FirmwareFilePath
+    # ./saa -c GetUSBHostControllerInfo --file FirmwareFilePath --file_only
+    # ./saa -c GetUSBHostControllerInfo --cfg_file ConfigFilePath
+    # ./saa -c GetUSBHostControllerInfo --cfg_file ConfigFilePath --file_only
+    # ./saa -c GetUSBHostControllerInfo --file FirmwareFilePath --cfg_file
+        ConfigFilePath
+    # ./saa -c GetUSBHostControllerInfo --file FirmwareFilePath --cfg_file
+        ConfigFilePath --file_only
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --file FirmwareFilePath --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --file FirmwareFilePath --file_only
+        --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --cfg_file ConfigFilePath --remote_saa
+        /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --cfg_file ConfigFilePath --file_only
+        --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --file FirmwareFilePath --cfg_file
+        ConfigFilePath --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetUSBHostControllerInfo --file FirmwareFilePath --cfg_file
+        ConfigFilePath --file_only --remote_saa /root/saa
+Multiple Systems
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo 
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --file FirmwareFilePath
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --file FirmwareFilePath --file_only
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --cfg_file ConfigFilePath
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --cfg_file ConfigFilePath --file_only
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --file FirmwareFilePath --cfg_file ConfigFilePath
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetUSBHostControllerInfo
+        --file FirmwareFilePath --cfg_file ConfigFilePath --file_only
+Notice
+    1. If the platform includes Renesas USB Host Controller device, please
+    execute "sudo make -f Makefile.drv" in "driver/renesas/USB" folder to create
+    device driver, and SAA will automatically mount the device driver.

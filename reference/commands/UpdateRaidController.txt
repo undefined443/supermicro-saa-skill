@@ -1,0 +1,63 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the RAID controller.
+Required Arguments
+    --file    <file name>
+          Updates the RAID controller with the given RAID file.
+    --controller    <Controller>
+          <Broadcom/Marvell> Vendor of RAID controller.
+    --dev_id    <Device ID>
+          Device ID of RAID controller.
+    --type    <type>
+          Specifies RAID type for Broadcom devices.
+          Supported types:
+          HBA
+          HA-RAID
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --upgrade_only
+          Firmware updates are only performed when the version is newer.
+    --check_reboot_required
+          Displays a warning message when a system reboot or power cycle is
+          required.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateRaidController --file
+        RAID_FW.rom --controller broadcom --type hba --dev_id 0 --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateRaidController --file
+        RAID_FW.rom --controller broadcom --type HA_RAID --dev_id 0
+        --upgrede_only --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateRaidController --file
+        RAID_FW.rom --controller broadcom --type HA_RAID --dev_id 0
+        --upgrade_only --check_reboot_required
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateRaidController --file
+        RAID_FW.rom --controller broadcom --type hba --dev_id 0 --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateRaidController --file RAID_FW.rom --controller broadcom
+        --type hba --dev_id 0 --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateRaidController
+        --file RAID_FW.rom --controller marvell --dev_id 0 --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateRaidController --file
+        RAID_FW.rom --controller broadcom --type hba --dev_id 0 --reboot
+Notice
+    1. Supported RAID controllers:
+    Broadcom: 3108, 3408, 3808, 3808N(AOM-S3808NI-4NM, AOC-SMG4-2M2), 3816,
+    3908, 3916 and 4116
+    Marvell: SE9230 and 88NR2241
+    2. -I Redfish_HI is required for in-band usage on X12 and later platforms.
+    3. In-band usage is only supported on X12 and later platforms.

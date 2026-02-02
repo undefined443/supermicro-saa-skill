@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets/Sets the USB Connection for Redfish Host Interface communication.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetConnection
+          2 = SetConnection
+Optional Arguments
+    --type    <type>
+          Sets USB connection
+          Supported connection type string:
+          0 = RNDIS
+          1 = CDC_ECM
+          (Input type string will be converted to above type number)
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ManageRHI --action 2 --type
+        CDC_ECM
+  In-Band
+    # ./saa -c ManageRHI --action 1
+    # ./saa -c ManageRHI --action 2 --type RNDIS
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c ManageRHI
+        --action 1
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c ManageRHI
+        --action 2 --type RNDIS
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ManageRHI --action 1
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c ManageRHI --action 1

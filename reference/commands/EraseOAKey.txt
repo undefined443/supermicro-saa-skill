@@ -1,0 +1,23 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Erases OA key of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+Usage Modes
+    [In-Band] [Remote In-Band] [Multiple Systems Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  In-Band
+    # ./saa -c EraseOAKey --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c EraseOAKey
+        --reboot --remote_saa /root/saa
+Multiple Systems
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c EraseOAKey --reboot

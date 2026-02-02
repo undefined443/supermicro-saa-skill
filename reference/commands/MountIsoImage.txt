@@ -1,0 +1,131 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Mounts an ISO image from the image file server.
+Required Arguments
+    --image_url    <URL>
+          The URLs to access the shared image file.
+          SAMBA URL: 'smb://<hostname or IP>/<shared point>/<file path>' 
+          SAMBA UNC: '\\<hostname or IP>\<shared point>\<file path>' 
+          HTTP URL: 'http://<hostname or IP>/<shared point>/<file path>' 
+          HTTPS URL: 'https://<hostname or IP>/<shared point>/<file path>'
+Optional Arguments
+    --id    <ID>
+          The specified ID to access the shared file.
+    --pw    <Password>
+          The specified password to access the shared file.
+    --pw_file    <Password File>
+          The specified file path to read password.
+    --redfish
+          Enables support for pure Redfish.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw smbpasswd
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw_file smbpasswd.txt
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+  In-Band
+    # ./saa -c MountIsoImage --image_url
+        'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -c MountIsoImage --image_url
+        'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -c MountIsoImage --image_url
+        'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -c MountIsoImage --image_url
+        'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw smbpasswd
+    # ./saa -c MountIsoImage --image_url
+        'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -c MountIsoImage --image_url
+        'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw_file smbpasswd.txt
+    # ./saa -c MountIsoImage --image_url
+        '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+    # ./saa -c MountIsoImage --image_url
+        '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        MountIsoImage --image_url
+        'smb://192.168.35.1/MYSharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c MountIsoImage --image_url
+        'smb://192.168.35.1/MYSharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso' --id smbid
+        --pw smbpasswd
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c MountIsoImage --image_url
+        '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid --pw_file
+        smbpasswd.txt
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c MountIsoImage --image_url
+        'smb://192.168.35.1/MYSharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c MountIsoImage --image_url
+        'smb://192.168.35.1/MYSharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd
+Notice
+    1. Either --pw or --pw_file option is applied.
+    2. If the image path/ID/password includes special character(s), it has to be
+    quoted.
+    3. You can follow the format below to set the port number after a hostname
+    or an IP address.
+    Example:
+    HTTP URL: http://supermicro.com:80/MYSharedPoint/MyFolder/Image.iso
+    HTTPS URL: https://supermicro.com:80/MYSharedPoint/MyFolder/Image.iso
+    SAMBA URL: smb://192.168.135.1:137/MYSharedPoint/MyFolder/Image.iso
+    SAMBA UNC: \\192.168.135.1:137\MYSharedPoint\MyFolder\Image.iso
+    The port number may not be supported by older versions of BMC firmware.

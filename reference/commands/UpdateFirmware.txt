@@ -1,0 +1,32 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    UpdateFirmware command updates the firmware of the modules.
+Required Arguments
+    --file    <file name>
+          --file <firmware-file>, specify the firmware file.
+    --apply_time    <apply time>
+          --apply-time <apply-time>, where apply-time must be one of
+          OnReset,OnStartUpdateRequest,Immediate
+    --module    <module name>
+          --module <module-name>, modulde-name must match with modules shown by
+          GetFirmwareInventoryInfo command or it can be  firmware Id
+Optional Arguments
+    --reboot
+          Reboot machine after uploading the firmware. 
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateFirmware --module BMC
+        --file example.bin --apply-time Immediate --reboot
+  In-Band
+    # ./saa -c UpdateFirmware -I Redfish_HI -u ADMIN -p ADMIN --module BMC
+        --file example.bin --apply-time Immediate --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateFirmware --module
+        BMC --file example.bin --apply-time Immediate --reboot

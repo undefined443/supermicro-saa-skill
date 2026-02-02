@@ -1,0 +1,52 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Performs the Operations related to Certificates Management.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          0 = GetCertList
+          1 = GenerateCSR
+          2 = UploadCert
+          3 = DeleteCert
+    --cfg_file    <SDSi-agent config file>
+          JSON file input need for generating the CSR token.
+Optional Arguments
+    --file    <file name>
+          Output file for wring the CSR string or input file for reading the
+          token content.
+    --type    <type>
+          The type of certificate needed for Uploading, Replacing, or Deleting
+          the certificate. Supported types are: LDAP, CA, HTTP.
+    --certid    <CERTIFICATE ID>
+          Certificate ID that is needed for replacing the existing certificate
+          or deleting the certificate.
+Usage Modes
+    [OOB] [In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage 
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage --action
+        GetCertList
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage --action
+        GenerateCSR --cfg_file input.json --file output.csr
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage --action UploadCert
+        --type CA --file certificate.pem
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage --action UploadCert
+        --type CA --file certificate.pem --certid 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CertManage --action DeleteCert
+        --type CA --certid 1
+  In-Band
+    # ./saa -c CertManage --action GetCertList -I Redfish_HI -u ADMIN -p ADMIN
+    # ./saa -c CertManage --action GenerateCSR  --config input.json --file
+        output.csr -I Redfish_HI -u ADMIN -p ADMIN
+    # ./saa -c CertManage --action GenerateCSR --config input.json --file
+        output.csr -I Redfish_HI -u ADMIN -p ADMIN
+    # ./saa -c CertManage --action UploadCert  --type CA --file certificate.pem
+        -I Redfish_HI -u ADMIN -p ADMIN
+    # ./saa -c CertManage --action DeleteCert  --type CA --certid 1 -I
+        Redfish_HI -u ADMIN -p ADMIN
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c CertManage 

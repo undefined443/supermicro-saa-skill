@@ -1,0 +1,81 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Displays TPM information related to TPM Firmware Update.
+Required Arguments
+    None
+Optional Arguments
+    --update    <update rule>
+
+          Updates a TPM with <update-rule>.
+          Possible values for <update-rule> are:
+          tpm12-pp                - TPM1.2 with Physical Presence or Deferred
+          Physical Presence.
+          tpm12-ownerauth         - TPM1.2 with TPM Owner Authorization.
+          Requires the -ownerauth parameter.
+          tpm12-takeownership     - TPM1.2 with TPM Ownership taken by
+          TPMFactoryUpd.
+          Use the -ownerauth parameter to overwrite the default secret.
+          tpm20-emptyplatformauth - TPM2.0 with platformAuth set to Empty
+          Buffer.
+          tpm20-platformpolicy    - TPM2.0 with an already set platform policy.
+          Use optional parameters -policyhandle for an external created
+          policy session or -policyfile for a configuration file with
+          policy digests. Without parameter, the default policy behavior
+          is used.
+          config-file             - Updates either a TPM1.2 or TPM2.0 to the
+          firmware version
+          configured in the configuration file.
+          Requires the -config parameter.
+          Cannot be used with --info, --tpm12-clearownership, or --setmode
+          parameters.
+    --reboot
+          The system restarts after the update. Use with only --update option.
+          Cannot be used with --info, --tpm12-clearownwership, --setmode.
+    --info
+          Displays TPM information related to TPM Firmware Update. Cannot be
+          used with --update, --file, --config, --tpm12-clearownership,
+          --policyhandle, --policyfile, --setmode or --force, --reboot
+          parameter.
+    --tpm12-clearownership
+          -tpm12-clearownership
+          Clears the TPM Ownership taken by SAA.
+          Use the -ownerauth parameter to overwrite the default secret.
+          Cannot be used with -info, -update, -firmware, -config, -setmode,
+          -policyhandle, -policyfile or -force parameter.
+
+    --setmode    <setmode-type>
+          --setmode <setmode-type>
+          Specifies the TPM mode to switch into.
+          Possible values for <setmode-type> are:
+          tpm20-fwupdate    - Switch to firmware update mode.
+          Requires the --file parameter.
+          tpm20-fwrecovery  - Switch to firmware recovery mode.
+          tpm20-operational - Switch back to TPM operational mode.
+          Cannot be used with --info, --update, --tpm12-clearownership,
+          --config,
+          --policyhandle, --policyfile or --force parameter.
+    --force
+
+          Allows a TPM Firmware Update onto the same firmware version when
+          used with -update parameter.
+          Cannot be used with -info, -tpm12-clearownership or -setmode parameter
+    --access-mode    <--access-mode>
+
+          --access-mode <mode> --path <path>
+          Optional parameter. Sets the mode the tool should use to connect to
+          the TPM device.
+          Possible values for <mode> are:
+          1 - Memory based access (default value, only supported on x86 based
+          systems
+          with PCH TPM support). Cannot be used with --path <path>
+          3 - Linux TPM driver. The --path <path> option can be set to define a
+          device path
+          (default value: /dev/tpm0)
+Usage Modes
+    [In-Band] 
+Node Product Key Required
+Examples
+Single System
+  In-Band
+    # ./saa -c UpdateTpm 

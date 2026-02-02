@@ -1,0 +1,79 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the system configuration (BIOS and BMC) of the managed system.
+Required Arguments
+    --file    <file name>
+          Updates the managed system with the given configuration file.
+Optional Arguments
+    --file_id    <file ID>
+          Assigns profile ID using the ProfileManage command.
+    --current_password    <current password>
+          Checks the current BIOS Administrator password.
+    --upload
+          Uploads the Blade system configuration file to the CMM for updating
+          profiles.
+    --update    <update rule>
+          Updates Blade system configuration with the existing system profile on
+          CMM.
+          Supported update rule: [Apply] or [Deploy]
+    --skip_precheck
+          Uploads and overwrites the existing system profile.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --dev_id    <Device ID>
+          Assigns Blade index and node ID.
+          Blade index: [A1-A14] or [B1-B14]
+          Node ID: [1-4]
+          Format: [A1], [A1_1] or [ALL] for all Blade nodes
+    --skip_unknown
+          Skips the unknown settings or menus in the system configuration file.
+    --skip_bbs
+          Skips the BBS-related menus in the BIOS configuration file.
+    --precheck
+          Checks configuration before update.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --cur_pw_file    <Current password file>
+          The specified file path to read BIOS Administrator password.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeSystemCfg --file
+        SystemCfg.xml --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeSystemCfg --upload
+        --file SystemCfg.xml
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeSystemCfg --dev_id
+        A1_1,B11_2 --update Apply --file_id 2 --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeSystemCfg --dev_id
+        A1_1,B11_2 --update Deploy --file_id 2 --reboot
+  In-Band
+    # ./saa -c ChangeSystemCfg --file SystemCfg.xml --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        ChangeSystemCfg --file SystemCfg.xml --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeSystemCfg --file
+        SystemCfg.xml --reboot --post_complete
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeSystemCfg --upload
+        --file SystemCfg.xml
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeSystemCfg --dev_id
+        A1_1,B11_2 --update Apply --file_id 2 --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeSystemCfg --dev_id
+        A1_1,B11_2 --update Deploy --file_id 2 --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c ChangeSystemCfg --file
+        SystemCfg.xml --reboot
+Notice
+    1. The --skip_unknown and --skip_bbs options are only supported on Intel(R)
+    Xeon(R) Scalable Processors with Intel(R) C620 Series Chipsets and later
+    platforms.
+    2. Some configuration tags are "<LicenseRequirement>" in BIOS configuration
+    XML file and require SFT-DCMS-SINGLE node product key.
+    3. Options --reboot and --post_complete are required for OOB usage.

@@ -1,0 +1,40 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates multi-node EC.
+Required Arguments
+    --file    <file name>
+          Updates the multi-node EC with the given multi-node EC image file.
+Optional Arguments
+    --individually
+          Updates each multi-node EC with corresponding FW file individually.
+    --force_update
+          Ignores other nodes power status and forces to update.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateMultinodeEc --file
+        EC.bin
+  In-Band
+    # ./saa -c UpdateMultinodeEc --file EC.bin
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateMultinodeEc --file EC.bin
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateMultinodeEc --file EC.bin --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateMultinodeEc --file
+        EC.bin
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateMultinodeEc --file
+        EC.bin
+Notice
+    1. Only can be operated on node A system to update multi-node EC.
+    2. For platforms before X12, make sure other nodes are powered off before
+    updating multi-node EC. Or use --force_update option to force update (not
+    recommended).

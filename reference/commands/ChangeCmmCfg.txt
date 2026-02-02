@@ -1,0 +1,39 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates the CMM configuration.
+Required Arguments
+    --file    <file name>
+          Updates the CMM with the given configuration file.
+Optional Arguments
+    --upload
+          Uploads the CMM configuration file to CMM for updating profiles.
+    --update    <update rule>
+          Updates CMM configuration with the existing profile on CMM.
+          Supported update rule: [Apply]
+    --skip_precheck
+          Uploads and overwrites the existing CMM profile.
+    --individually
+          Updates each CMM with corresponding configuration file individually.
+    --skip_unknown
+          Skips the unknown tables or settings in the CMM configuration file.
+    --precheck
+          Checks configuration before update.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeCmmCfg --file CmmCfg.xml
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeCmmCfg --upload --file
+        CmmCfg.xml
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c ChangeCmmCfg --update Apply
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c ChangeCmmCfg --file
+        CmmCfg.xml --individually
+Notice
+    1. --individually option should be used with -l option for multiple OOB
+    usage.

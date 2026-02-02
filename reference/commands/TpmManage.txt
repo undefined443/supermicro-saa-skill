@@ -1,0 +1,121 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the trusted platform module of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --clear_and_enable_dtpm_txt
+          Clears dTPM ownership and activates dTPM/TXT.
+    --clear_dtpm
+          Clears dTPM ownership, and disables dTPM for TPM 1.2.
+          Clears dTPM ownership for TPM 2.0
+    --enable_txt_and_dtpm
+          Enables TXT and dTPM.
+    --clear_and_enable_dtpm
+          Clears dTPM ownership, disables dTPM (for TPM 1.2 only) and activates
+          dTPM.
+    --disable_dtpm
+          Disables dTPM.
+    --disable_txt
+          Disables TXT.
+    --provision
+          Launches the trusted platform module provision procedure.
+    --table_default
+          Uses the default TPM provision table.
+    --table    <table file>
+          Uses the given customized TPM provision table file.
+    --post_complete
+          Waits for the managed system’s POST to complete after rebooting.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage
+        --clear_and_enable_dtpm_txt --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage --clear_dtpm
+        --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage
+        --enable_txt_and_dtpm --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage
+        --clear_and_enable_dtpm --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage --disable_dtpm
+        --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage --disable_txt
+        --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage --provision
+        --table_default --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmManage --provision --table
+        provision_table.bin --reboot
+  In-Band
+    # ./saa -c TpmManage --clear_and_enable_dtpm_txt --reboot
+    # ./saa -c TpmManage --clear_dtpm --reboot
+    # ./saa -c TpmManage --enable_txt_and_dtpm --reboot
+    # ./saa -c TpmManage --clear_and_enable_dtpm --reboot
+    # ./saa -c TpmManage --disable_dtpm --reboot
+    # ./saa -c TpmManage --disable_txt --reboot
+    # ./saa -c TpmManage --provision --table_default --reboot
+    # ./saa -c TpmManage --provision --table provision_table.bin --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --clear_and_enable_dtpm_txt --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --clear_dtpm --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --enable_txt_and_dtpm --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --clear_and_enable_dtpm --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --disable_dtpm --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --disable_txt --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --provision --table_default --reboot
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c TpmManage
+        --provision --table provision_table.bin --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage
+        --clear_and_enable_dtpm_txt --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage --clear_dtpm
+        --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage
+        --enable_txt_and_dtpm --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage
+        --clear_and_enable_dtpm --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage --disable_dtpm
+        --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage --disable_txt
+        --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage --provision
+        --table_default --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmManage --provision
+        --table provision_table.bin --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage
+        --clear_and_enable_dtpm_txt --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage --clear_dtpm
+        --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage
+        --enable_txt_and_dtpm --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage
+        --clear_and_enable_dtpm --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage --disable_dtpm
+        --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage --disable_txt
+        --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage --provision
+        --table_default --reboot
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c TpmManage --provision --table
+        provision_table.bin --reboot
+Notice
+    1. The --reboot option is required by the TPM provision procedure for OOB
+    Intel OTA solution.
+    2. The --disable_dtpm option is not supported from 14th generation Intel
+    platform.

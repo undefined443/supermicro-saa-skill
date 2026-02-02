@@ -1,0 +1,166 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages the virtual media devices of the managed system.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = Enable
+          2 = Disable
+          3 = Mount
+          4 = Unmount
+Optional Arguments
+    --port    <port>
+          Command optional port(s)
+          The format is 'VM:623' or '623'.
+          Command optional port(s) list:
+          1. VM (for virtual media port)
+    --image_url    <URL>
+          The URLs to access the shared image file.
+          SAMBA URL: '<hostname or IP>/<shared point>/<file path>'
+          HTTP URL: 'http://<hostname or IP>/<shared point>/<file path>'
+          HTTPS URL: 'https://<hostname or IP>/<shared point>/<file path>'
+    --id    <ID>
+          The specified ID to access the shared file.
+    --pw    <Password>
+          The specified password to access the shared file.
+    --pw_file    <Password File>
+          The specified file path to read password.
+    --dev_id    <Device ID>
+          The specified device ID to manage specified device.
+          The supported device ID: [1-3]
+          Support [All] for action Unmount to unmount all devices.
+    --verify_cert
+          Verify SSL certificate. (Only support for HTTPS protocol)
+    --accept_self_signed
+          Accept self-signed certificate. (Only supported for HTTPS protocol)
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Enable
+        --port 623
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Disable
+        --port 623
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 2
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --verify_cert --accept_self_signed --dev_id 2
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --verify_cert --accept_self_signed
+        --dev_id 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 2
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id All
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Enable --port
+        623
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Disable --port
+        623
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 2
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 3
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --verify_cert --accept_self_signed --dev_id 2
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --verify_cert --accept_self_signed
+        --dev_id 3
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 2
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id All
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c VmManage --action Mount --image_url
+        'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id smbid --pw
+        smbpasswd --dev_id 1
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Enable
+        --port 623
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Disable
+        --port 623
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'smb://[2001:db8::1]/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 2
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'http://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --verify_cert --accept_self_signed --dev_id 2
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url 'https://[2001:db8::1]:80/MySharedPoint/MyFolder/Image.iso'
+        --id smbid --pw_file smbpasswd.txt --verify_cert --accept_self_signed
+        --dev_id 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\192.168.35.1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Mount
+        --image_url '\\2001:db8::1\MySharedPoint\MyFolder\Image.iso' --id smbid
+        --pw_file smbpasswd.txt --dev_id 2
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id 1
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c VmManage --action Unmount
+        --dev_id All
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c VmManage --action Mount
+        --image_url 'smb://192.168.35.1/MySharedPoint/MyFolder/Image.iso' --id
+        smbid --pw smbpasswd --dev_id 1
+Notice
+    1. Either --pw or --pw_file option is applied.
+    2. If the image path/ID/password includes special character(s), it has to be
+    quoted.
+    3. You can follow the format below to set the port number after a hostname
+    or an IP address.
+    Example:
+    HTTP URL: http://supermicro.com:80/MYSharedPoint/MyFolder/Image.iso
+    HTTPS URL: https://supermicro.com:80/MYSharedPoint/MyFolder/Image.iso
+    SAMBA URL: smb://192.168.135.1:137/MYSharedPoint/MyFolder/Image.iso
+    SAMBA UNC: \\192.168.135.1:137\MYSharedPoint\MyFolder\Image.iso

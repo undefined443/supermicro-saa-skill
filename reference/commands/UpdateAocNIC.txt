@@ -1,0 +1,73 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates AOC NIC FW.
+Required Arguments
+    --file    <file name>
+          Updates AOC NIC with the given add-on NIC file.
+    --dev_id    <Device ID>
+          Device ID of AOC NIC.
+Optional Arguments
+    -I    <InterfaceName>
+          <Redfish_HI> Uses Redfish Host Interface for in-band update. (Only
+          support for in-band usage)
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --post_complete
+          Waits for the managed system's POST to complete after reboot.
+    --upgrade_only
+          Firmware updates are only performed when the version is newer.
+    --check_reboot_required
+          Displays a warning message when a system reboot or power cycle is
+          required.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 1 --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateAocNIC  --file
+        AOC_NIC_FW.rom --dev_id 1 --upgrade_only --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateAocNIC  --file
+        AOC_NIC_FW.rom --dev_id 1 --upgrade_only --check_reboot_required
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --reboot
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --reboot --upgrade_only
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --upgrade_only --check_reboot_required
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateAocNIC --file AOC_NIC_FW.rom --dev_id 2 --reboot
+        --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateAocNIC --file AOC_NIC_FW.rom --dev_id 2 --reboot
+        --upgrade_only --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateAocNIC --file AOC_NIC_FW.rom --dev_id 2 --upgrade_only
+        --check_reboot_required --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 3 --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateAocNIC  --file
+        AOC_NIC_FW.rom --dev_id 3 --upgrade_only --reboot --post_complete
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateAocNIC  --file
+        AOC_NIC_FW.rom --dev_id 3 --upgrade_only --check_reboot_required
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --reboot --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --reboot --upgrade_only --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateAocNIC --file
+        AOC_NIC_FW.rom --dev_id 2 --upgrade_only --check_reboot_required
+        --remote_saa /root/saa
+Notice
+    1. Supports only on X12/H12 and later platforms.
+    2. Please use GetAocNICInfo to check --dev_id value.
+    3. --post_complete is recommended for Out-Of-Band usage.

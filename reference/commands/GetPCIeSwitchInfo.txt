@@ -1,0 +1,58 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the PCIe Switch information of the managed system/input PCIe Switch
+    image file.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Reads the PCIe Switch information from an input PCIe Switch image
+          file.
+    --showall
+          Shows additional information about the PCIe Switch device.
+    --file_only
+          Works with the --file option, and only reads PCIe Switch information
+          from the input image file.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetPCIeSwitchInfo 
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg --file_only
+  In-Band
+    # ./saa -c GetPCIeSwitchInfo 
+    # ./saa -c GetPCIeSwitchInfo --file PCIeSwitch.fwimg
+    # ./saa -c GetPCIeSwitchInfo --file PCIeSwitch.fwimg --file_only
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetPCIeSwitchInfo --remote_sum /root/sum
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetPCIeSwitchInfo --file PCIeSwitch.fwimg --remote_sum /root/sum
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetPCIeSwitchInfo --file PCIeSwitch.fwimg --file_only --remote_sum
+        /root/sum
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetPCIeSwitchInfo 
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg --file_only
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetPCIeSwitchInfo 
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetPCIeSwitchInfo --file
+        PCIeSwitch.fwimg --file_only
+Notice
+    1. If the platform includes Broadcom PCIeSwitch device, please execute "sudo
+    ./builddriver Svc" in "driver/broadcom/PlxSdk/Driver" folder to create
+    device driver, and SUM will automatically mount the device driver.

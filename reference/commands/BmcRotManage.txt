@@ -1,0 +1,50 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes RoT-related actions.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetInfo
+          2 = UpdateGolden
+          3 = Recover
+          4 = DownloadEvidence
+Optional Arguments
+    --file    <file name>
+          Works with --action DownloadEvidence. Saves the BMC evidence to a
+          file.
+    --overwrite
+          Works with --action DownloadEvidence. Overwrites the output file.
+    --redfish
+          Enables support for pure Redfish.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+    SFT-DCMS-SINGLE for action Recover and DownloadEvidence
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BmcRotManage --action 3
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c BmcRotManage --action 4 --file
+        evidence.bin.gz
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c BmcRotManage --action
+        UpdateGolden
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c BmcRotManage --action UpdateGolden
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c BmcRotManage --action
+        GetInfo
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c BmcRotManage --action GetInfo
+Notice
+    1. Support only on RoT system of X12 and later platforms.
+    2. UpdateGolden action will overwrite golden image with current BMC
+    firmware.
+    3. DownloadEvidence action is only available after automatic or manual BMC
+    recovery.
+    4. The BMC evidence is a compressed gzip file.

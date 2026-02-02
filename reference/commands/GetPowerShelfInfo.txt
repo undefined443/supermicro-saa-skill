@@ -1,0 +1,24 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Displays information about power units in the managed Power Shelf system
+Required Arguments
+    None
+Optional Arguments
+    --dev_id    <Device ID>
+          Specifies the device ID to retrieve information for a single power
+          unit. Supported values: [0–5].
+    --json_view
+          Sets the output format to JSON.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetPowerShelfInfo  
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetPowerShelfInfo --json_view
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetPowerShelfInfo  

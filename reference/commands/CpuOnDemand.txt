@@ -1,0 +1,57 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets and activates Intel® CPU On Demand Capabilities features.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetHwInfo
+          2 = GetOnDemandState
+          3 = SetLicenseActivateCode
+          4 = EnablePPIN
+Optional Arguments
+    None
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    SFT-DCMS-SINGLE
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CpuOnDemand --action GetHwInfo
+        -h
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c CpuOnDemand --action
+        GetOnDemandState -h
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c CpuOnDemand --action 1 -h
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c CpuOnDemand --action 2 -h
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c CpuOnDemand --action 3 -h
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c CpuOnDemand --action 4 -h
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c CpuOnDemand --action
+        SetLicenseActivateCode -h
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c CpuOnDemand --action
+        EnablePPIN -h
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c CpuOnDemand --action GetHwInfo
+        -h
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c CpuOnDemand --action
+        GetOnDemandState -h
+Notice
+    1. PPIN stands for "Protected Processor Inventory Number" and can be
+    received from action 1 = GetHwInfo. If PPIN value under Hardware ID column
+    shows 16 of 0-digits("0000000000000000") or "NO" under "SDSi Enable" column,
+    please choose one of the steps to enable PPIN control(a. Apply action 4 =
+    EnablePPIN and wait for the system to be POST-completed. b. Change "PPIN
+    Control" setting to "Unlock/Enabled" under BIOS configuration with
+    GetCurrentBiosCfg and ChangeBiosCfg commands. c. Manually enable the PPIN
+    Control in "BIOS\Advanced\CPU Configuration\PPIN Control" in BIOS
+    configuration.)
+    2. For the entire procedure of activating "Intel® On-Demand Capabilities",
+    please refer to SAA user guide for more details.
+    3. The command requires the managed system to be in Power-on status.

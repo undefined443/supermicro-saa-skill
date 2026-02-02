@@ -1,0 +1,25 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates CPLD of AIP (AI Processor).
+Required Arguments
+    --file    <file name>
+          Updates the CPLD of AIP with the given FW image file.
+Optional Arguments
+    --individually
+          Updates each AIP CPLD with its corresponding image file individually.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateAipCpld --file
+        AIP_CPLD.bin
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateAipCpld --file
+        AIP_CPLD.bin
+Notice
+    1. Supports for Gaudi HL205 AIP on Habana system only.

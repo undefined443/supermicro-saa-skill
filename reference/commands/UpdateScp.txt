@@ -1,0 +1,37 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates SCP.
+Required Arguments
+    --file    <file name>
+          Updates SCP with the given FW image file.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+Optional Arguments
+    --individually
+          Updates each SCP with corresponding firmware file individually.
+    --post_complete
+          Waits until the managed system completes POST following a reboot.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateScp --file SCP_FW.tar
+        --reboot
+  In-Band
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateScp --file SCP_FW.tar
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateScp --file SCP_FW.tar --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateScp --file
+        SCP_FW.tar --reboot
+  Remote In-Band
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c UpdateScp --file SCP_FW.tar
+        --reboot

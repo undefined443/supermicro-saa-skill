@@ -1,0 +1,89 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Runs Super Diagnostics Offline (SDO) and checks results.
+Required Arguments
+    --action    <action>
+          Sets SuperDiag action to:
+          1 = Start
+          2 = Download
+          3 = Display
+          4 = List
+Optional Arguments
+    --file    <file name>
+          Start action: Mounts the ISO image to run diagnostics.
+          Download/Display action: Enters the filename for diagnostic results.
+    --overwrite
+          Overwrites the diagnostic results file.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --image_url    <URL>
+          The URLs to access the shared image file.
+          SAMBA URL: 'smb://<hostname or IP>/<shared point>/<file path>' 
+          SAMBA UNC: '\\<hostname or IP>\<shared point>\<file path>' 
+          HTTP URL: 'http://<hostname or IP>/<shared point>/<file path>' 
+          HTTPS URL: 'https://<hostname or IP>/<shared point>/<file path>'
+    --dev_id    <Device ID>
+          The specified device to mount ISO image.
+          The supported device ID: [1-3]
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --type    <type>
+          Sets display type to:
+          1 = Info
+          2 = Pass
+          3 = Fail
+    --index    <index>
+          The specified index to mount local USB.
+    --line    <line>
+          Prints the number of lines at a time.
+    --keyword    <keyword>
+          Prints results that match the keyword.
+    --embedded
+          For action Start: Starts a diagnostic in embedded mode.
+          For action Download: Downloads the diagnostic report for embedded SDO.
+    --usb
+          For action Start: Starts a diagnostic with local USB device.
+          For action List: Lists available device indexes to mount local USB.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Start
+        --file SuperDiag.iso' --reboot --post_complete
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Start
+        --image_url '\192.168.135.1\MYSharedPoint\MyFolder\SuperDiag.iso'
+        --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Start --usb
+        --index 3 --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Start
+        --reboot --embedded
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Download
+        --file result.json
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SuperDiag --action Download
+        --file result.html --embedded
+  In-Band
+    # ./saa -c SuperDiag --action Download --file result.json
+    # ./saa -c SuperDiag --action Display --file result.json --line 20
+    # ./saa -c SuperDiag --action List --usb
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SuperDiag --action Start --reboot
+        --embedded
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c SuperDiag --action Download
+        --file result.html --embedded
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SuperDiag --action Start
+        --image_url '\192.168.135.1\MYSharedPoint\MyFolder\SuperDiag.iso'
+        --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SuperDiag --action Start
+        --reboot --embedded
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SuperDiag --action
+        Download --file result.json
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SuperDiag --action
+        Download --file result.html --embedded
+Notice
+    1. Option '--image_url' requires SFT-OOB-LIC node product key.
+    2. Option '--embedded' requires SFT-DCMS-LIC node product key.

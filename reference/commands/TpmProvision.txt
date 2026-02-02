@@ -1,0 +1,54 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Launches the trusted platform module provision procedure.
+Required Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --image_url    <URL>
+          The URLs to access the shared image file.
+          SAMBA URL: 'smb://<host name or IP>/<shared point>/<file path>' 
+          SAMBA UNC: '\\<host name or IP>\<shared point>\<file path>' 
+          HTTP URL: 'http://<host name or IP>/<shared point>/<file path>'
+    --lock    <yes/no>
+          <yes> Locks the TPM module.
+Optional Arguments
+    --id    <ID>
+          The specified ID to access the shared file.
+    --pw    <Password>
+          The specified password to access the shared file.
+    --pw_file    <Password File>
+          The specified file path to read password.
+    --cleartpm
+          Clears the ownership of the TPM module and restores the relevant TPM
+          BIOS settings.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    Yes
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmProvision --image_url
+        'smb://192.168.135.1/MYSharedPoint/MyFolder' --id 'smbid' --pw
+        'smbpassword' --lock yes --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmProvision --image_url
+        'http://supermicro.com/MYSharedPoint/MyFolder' --id smbid --pw
+        smbpassword --lock yes --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmProvision --image_url
+        '\\192.168.135.1\MYSharedPoint\MyFolder' --id smbid --pw smbpassword
+        --lock yes --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c TpmProvision --image_url
+        '\\192.168.135.1\MYSharedPoint\MyFolder' --id smbid --pw smbpassword
+        --reboot --cleartpm
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c TpmProvision --image_url
+        'smb://192.168.135.1/MYSharedPoint/MyFolder' --id smbid --pw smbpassword
+        --lock yes --reboot
+Notice
+    1. Only support X10 Grantley and X11 Greenlow platforms.
+    2. Support only "yes" for --lock option.
+    3. Either --pw or --pw_file option is applied.
+    4. If image path/ID/password includes special character(s), it has to be
+    quoted.

@@ -1,0 +1,98 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Manages KMS server network configurations.
+Required Arguments
+    None
+Optional Arguments
+    --port    <port>
+          Command optional port(s)
+          The format is "TCP:5696" or "5696"
+          Command optional port(s) list:
+          1. TCP (for KMS server port)
+    --current_password    <current password>
+          Checks the current BIOS Administrator password.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --action    <action>
+          Sets KMS manage action to:
+          1 = GetInfo
+          2 = Probe
+          3 = DeleteCA
+          4 = DeleteCert
+          5 = DeletePvtKey
+          6 = DeleteAll
+    --post_complete
+          Waits for the managed system's POST to complete after reboot.
+    --cur_pw_file    <Current password file>
+          The specified file path to read current password.
+    --server_ip    <server IP address>
+          Enters KMS server IP address.
+    --second_server_ip    <second server IP address>
+          Enters second KMS server IP address.
+    --time_out    <time out>
+          Enters KMS server connecting time-out.
+    --time_zone    <timezone>
+          Enters correct time zone GMT+.
+    --client_username    <client username>
+          Enters client identity: UserName.
+    --client_password    <client password>
+          Enters client identity: Password.
+    --ca_cert    <CA certificate file name>
+          Uploads CA certificate from the file.
+    --client_cert    <client certificate file name>
+          Uploads client certificate from the file.
+    --pvt_key    <private key file name>
+          Uploads client private key from the file.
+    --pvt_key_pw    <private key password>
+          Enters client private key password.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes
+    SFT-DCMS-SINGLE for TLS upload configuration.
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c KmsManage --server_ip
+        192.168.12.78 --port 5696 --ca_cert ca.crt --client_cert client.crt
+        --pvt_key private.key --action Probe --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c KmsManage --server_ip
+        192.168.12.78 --port TCP:5696 --ca_cert ca.crt --client_cert client.crt
+        --pvt_key private.key --action Probe --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c KmsManage --action GetInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c KmsManage --action DeleteAll
+        --reboot
+  In-Band
+    # ./saa -c KmsManage --server_ip 192.168.12.78 --port 5696 --ca_cert ca.crt
+        --client_cert client.crt --pvt_key private.key --action Probe --reboot
+    # ./saa -c KmsManage --server_ip 192.168.12.78 --port TCP:5696 --ca_cert
+        ca.crt --client_cert client.crt --pvt_key private.key --action Probe
+        --reboot
+    # ./saa -c KmsManage --action GetInfo
+    # ./saa -c KmsManage --action DeleteAll --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c KmsManage
+        --action GetInfo
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c KmsManage
+        --action DeleteAll --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c KmsManage --server_ip
+        192.168.12.78 --port 5696 --ca_cert ca.crt --client_cert client.crt
+        --pvt_key private.key --action Probe --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c KmsManage --server_ip
+        192.168.12.78 --port TCP:5696 --ca_cert ca.crt --client_cert client.crt
+        --pvt_key private.key --action Probe --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c KmsManage --action GetInfo
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c KmsManage --action
+        DeleteAll --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c KmsManage --action GetInfo
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c KmsManage --action DeleteAll
+        --reboot
+Notice
+    1. Option '--action Probe' requires a system reboot. Wait for managed system
+    POST complete after rebooting, then use option --action GetInfo to check the
+    probe status.

@@ -1,0 +1,99 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Gets the event log of the managed system.
+Required Arguments
+    None
+Optional Arguments
+    --file    <file name>
+          Saves the event log to a file.
+          Prints the event log on screen if the file-saving function is not
+          available.
+    --overwrite
+          Overwrites the output file.
+    --redfish
+          Enables pure Redfish support.
+    --json_view
+          Sets the output format to JSON.
+    --info
+          Print the current and total capacity of event log.
+    --raw_data
+          Prints the raw data of each event log.
+    --mfg
+          Prints the general information of event logs for the managed system in
+          a style that complies with the manufacturer's assembly line
+          requirements.
+    --year    <year>
+          Filter event logs within n years
+    --month    <month>
+          Filter event logs within n months
+    --day    <day>
+          Filter event logs within n days
+    --format    <file format>
+          Saves the event log to a file in CSV format.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog 
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog --info
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog --raw_data
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog --mfg
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog --year 1
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c GetEventLog --file log
+        --format csv --overwrite
+  In-Band
+    # ./saa -c GetEventLog --file log.txt
+    # ./saa -c GetEventLog --info
+    # ./saa -c GetEventLog --raw_data
+    # ./saa -c GetEventLog --mfg
+    # ./saa -c GetEventLog --day 1
+    # ./saa -c GetEventLog --file log --format csv
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetEventLog --file log.txt
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetEventLog --year 1
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c GetEventLog --file log --format
+        csv
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetEventLog --file log.txt --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetEventLog --info --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetEventLog --raw_data --remote_saa /root/saa
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        GetEventLog --file log --format csv --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetEventLog --file log.txt --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c GetEventLog --file log --format csv --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --file log.txt
+        --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --info --file
+        log.txt --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --raw_data
+        --file log.txt --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --mfg --file
+        log.txt --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --month 1
+        --file log.txt --overwrite
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c GetEventLog --file log
+        --format csv --overwrite
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetEventLog --file log.txt
+        --overwrite --remote_saa /root/saa
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetEventLog --info
+        --remote_saa /root/saa
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetEventLog --raw_data
+        --remote_saa /root/saa
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c GetEventLog --file log
+        --format csv --overwrite --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetEventLog --file log.txt
+        --overwrite --remote_saa /root/saa
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c GetEventLog --file log
+        --format csv --overwrite --remote_saa /root/saa

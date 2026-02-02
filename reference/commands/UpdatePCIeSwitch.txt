@@ -1,0 +1,56 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates PCIe switch firmware.
+Required Arguments
+    --file    <file name>
+          PCIe switch firmware file
+    --dev_id    <Device ID>
+          PCIe switch device ID. Can be retrieved with GetPCIeSwitchInfo
+          command.
+Optional Arguments
+    --reboot
+          Forces the managed system to power cycle after operation.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0 --reboot
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0 --reboot --post_complete
+  In-Band
+    # ./saa -c UpdatePCIeSwitch --file PCIeSwitch.fwimg --dev_id 0 
+    # ./saa -c UpdatePCIeSwitch --file PCIeSwitch.fwimg --dev_id 0 --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        UpdatePCIeSwitch --file PCIeSwitch.fwimg --dev_id 0 --remote_sum
+        /root/sum
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        UpdatePCIeSwitch --file PCIeSwitch.fwimg --dev_id 0  --reboot
+        --remote_sum /root/sum
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0 --reboot
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0 --reboot --post_complete
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UpdatePCIeSwitch --file
+        PCIeSwitch.fwimg --dev_id 0 --reboot
+Notice
+    1. If the platform includes Broadcom PCIeSwitch device, please execute "sudo
+    ./builddriver Svc" in "driver/broadcom/PlxSdk/Driver" folder to create
+    device driver, and SUM will automatically mount the device driver.

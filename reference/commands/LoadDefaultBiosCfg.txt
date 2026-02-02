@@ -1,0 +1,45 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Loads the default factory BIOS configuration.
+Required Arguments
+    None
+Optional Arguments
+    --current_password    <current password>
+          Checks the current BIOS Administrator password.
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --redfish
+          Enables pure Redfish support.
+    --post_complete
+          Waits for the managed system POST complete after rebooting.
+    --clear_bios_eventlog
+          Clears the BIOS event log.
+    --cur_pw_file    <Current password file>
+          The specified file path to read current password.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No for X14/H14 and the later platforms with Redfish usage.
+    Yes for non-Redfish usage.
+    SFT-DCMS-SINGLE for platforms before X14/H14 with Redfish usage.
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c LoadDefaultBiosCfg --reboot
+  In-Band
+    # ./saa -c LoadDefaultBiosCfg --reboot
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c LoadDefaultBiosCfg --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c
+        LoadDefaultBiosCfg --reboot --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c LoadDefaultBiosCfg --reboot
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c LoadDefaultBiosCfg
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c LoadDefaultBiosCfg --reboot
+    # ./saa -I Remote_RHI -l IP_ADDR_RANGE.txt -c LoadDefaultBiosCfg --reboot

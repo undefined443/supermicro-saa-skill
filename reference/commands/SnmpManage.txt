@@ -1,0 +1,46 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes command to manage SNMP.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = GetStatus
+          2 = On
+          3 = Off
+          4 = GetCommunityString
+          5 = SetCommunityString
+Optional Arguments
+    --snmp_id    <SNMP ID>
+          Assigns SNMP index.
+          SNMP index: [1-15]
+    --snmp_ip    <SNMP IP>
+          Sets SNMP IP
+    --snmp_mac    <SNMP MAC>
+          Sets SNMP MAC address
+    --community_string    <Community String>
+          Sets SNMP community string
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SnmpManage --action on
+        --snmp_id 1 --snmp_ip 127.0.0.1 
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c SnmpManage --action 2
+        --snmp_id 1 --snmp_ip 127.0.0.1 --snmp_mac 12:34:56:78:9A:BC
+  In-Band
+    # ./saa -c SnmpManage --action GetStatus
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c SnmpManage
+        --action GetStatus --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c SnmpManage --action 5
+        --community_string public
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c SnmpManage --action GetStatus
+        --remote_saa /root/saa

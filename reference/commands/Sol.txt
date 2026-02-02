@@ -1,0 +1,64 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Executes SOL related commands.
+Required Arguments
+    --action    <action>
+          Sets action to:
+          1 = Activate
+          2 = Deactivate
+          3 = GetInfo
+          4 = Set
+    Note:
+        1. Use action Activate to activate SOL.
+        2. Use action Deactivate to stop SOL.
+        3. Use action GetInfo to get SOL information.
+        4. Use action Set to set SOL parameters.
+Optional Arguments
+    --value    <assignment value>
+          Assigns the value to the item.
+          (Only supported with the 'Set' action.)
+    --item    <item name>
+          Sets the SOL item value for the given SOL item.
+          (Only supported with the 'Set' action.)
+          1 = set-in-progress
+          	Available values: [set-complete|set-in-progress|commit-write]
+          2 = enabled
+          	Available values: [true|false]
+          3 = privilege-level
+          	Available values: [user|operator|admin|oem]
+          4 = force-encryption
+          	Available values: [true|false]
+          5 = force-authentication
+          	Available values: [true|false]
+          6 = character-accumulate-level
+          	Available values: Integer, in 5 ms increments
+          7 = character-send-threshold
+          	Available values: Integer
+          8 = retry-count
+          	Available values: Integer
+          9 = retry-interval
+          	Available values: Integer, in 10 ms increments
+          10 = non-volatile-bit-rate
+          	Available values: [serial|9.6|19.2|38.4|57.6|115.2]
+          11 = volatile-bit-rate
+          	Available values: [serial|9.6|19.2|38.4|57.6|115.2]
+    --channel    <channel>
+          Assigns the SOL channel.
+Usage Modes
+    [OOB] [Multiple Systems OOB] 
+Node Product Key Required
+    No
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Sol --action Activate
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Sol --action GetInfo
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c Sol --action Set --item
+        non-volatile-bit-rate --value 115.2
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c Sol --action Set --item
+        retry-count --value 3
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c Sol --action Set --item
+        force-encryption --value true

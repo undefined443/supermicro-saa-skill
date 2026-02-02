@@ -1,0 +1,91 @@
+SuperServer Automation Assistant 1.4.0 (2025/10/22) (x86_64)
+Copyright(C) 2024-2025 Super Micro Computer, Inc. All rights reserved.
+Description
+    Updates BIOS.
+Required Arguments
+    --file    <file name>
+          Updates the BIOS with the given BIOS image file.
+Optional Arguments
+    --reboot
+          Forces the managed system to reboot or power up after operation.
+    --individually
+          Updates each BIOS with corresponding configuration file individually.
+    --flash_smbios
+          Overwrites and resets the SMBIOS data.
+    --preserve_nv
+          Preserves the NVRAM. This option is used only for specific purposes.
+          Unless you are familiar with BIOS NVRAM, do not use this option. (Not
+          available on X12 and later systems.)
+    --preserve_mer
+          Preserves the ME firmware region. This option is used only for
+          specific purposes. Unless you are familiar with ME firmware image, do
+          not use this option. (Not available on X12 and later RoT systems.)
+    --redfish
+          Enables support for pure Redfish.
+    --preserve_setting
+          Preserves BIOS configurations.
+    --erase_OA_key
+          Erases OA key.
+    --backup
+          Backs up the current BIOS image. (Only supported by the RoT systems.)
+    --forward
+          Confirms the Rollback ID forward and upgrades to the next
+          revision.(Only supported by the X12/H12 and later platforms except the
+          H12 non-RoT systems.)
+    --staged    <action>
+          Sets action to:
+          1 = update : The update process will start at the next system boot.
+          2 = abort : Aborts the previously staged update task.
+          3 = getinfo : Check whether if there was any pending staged update
+          task.
+    --post_complete
+          Waits for the managed system POST complete after reboot.
+    --clear_password
+          Clears BIOS password.
+    --erase_secure_boot_key
+          Erases secure boot key.
+    --reset_boot_option
+          Resets BIOS boot configurations.
+    --upgrade_only
+          Firmware updates are only performed when the version is newer.
+    --check_reboot_required
+          Displays a warning message when a system reboot or power cycle is
+          required.
+Usage Modes
+    [OOB] [In-Band] [Multiple Systems OOB] [Remote In-Band] [Multiple Systems
+    Remote In-Band] 
+Node Product Key Required
+    Yes for [OOB] on platforms before H12/X12 and H12 non-RoT systems.
+Examples
+Single System
+  OOB
+    # ./saa -i 192.168.34.56 -u ADMIN -p ADMIN -c UpdateBios --file BIOS.bin
+        --reboot
+  In-Band
+    # ./saa -c UpdateBios --file BIOS.bin --reboot
+    # ./saa -I Redfish_HI -u ADMIN -p ADMIN -c UpdateBios --file BIOS.bin
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB --oi 192.168.34.57 --ou root --op 111111 -c UpdateBios
+        --file BIOS.bin --reboot --remote_saa /root/saa
+    # ./saa -I Remote_RHI --oi 192.168.34.57 --ou root --op 111111 -u ADMIN -p
+        ADMIN -c UpdateBios --file BIOS.bin --reboot --remote_saa /root/saa
+Multiple Systems
+  OOB
+    # ./saa -l IP_ADDR_RANGE.txt -u ADMIN -p ADMIN -c UpdateBios --file BIOS.bin
+        --reboot
+  Remote In-Band
+    # ./saa -I Remote_INB -l IP_ADDR_RANGE.txt -c UpdateBios --file BIOS.bin
+        --reboot
+Notice
+    1. For [OOB] and [Multiple Systems OOB] usage modes, before executing this
+    command, it is recommended that the managed system be powered off.
+    2. The --preserve_setting option is only supported on Intel(R) Xeon(R)
+    Scalable Processors with Intel(R) C620 Series Chipsets and later platforms.
+    Note that --preserve_setting option requires a "SFT-OOB-LIC" product key for
+    X12 3rd Generation Intel® Xeon® Scalable processors with Intel® C620
+    Series Chipsets. The preserved setting configurations will be listed in
+    preserved_settings.log.
+    3. BIOS setting will be reset without option --preserve_setting
+    4. -I Redfish_HI is required for in-band usage on RoT system for H12/X12 and
+    later platforms.
